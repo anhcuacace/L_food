@@ -34,7 +34,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\itema', 'src\\main\\res\\item', 'src\\main\\res\\layouts\\activity', 'src\\main\\res\\layouts\\item'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\itema', 'src\\main\\res\\item', 'src\\main\\res\\layouts\\activity', 'src\\main\\res\\layouts\\item', 'src\\main\\res\\layouts\\fragment'
             }
         }
     }
