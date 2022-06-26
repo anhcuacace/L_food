@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ativity.activity.IntroActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/screen_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/CircleIndicator3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+    <Button
+        android:background="@color/white"
+        android:id="@+id/intro_button_skip"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skip"
+        android:backgroundTint="@color/linh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/intro_button"
+        android:textColor="@color/black"
+        android:drawableTint="@color/black"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+        android:layout_width="wrap_content"
+        android:background="@color/white"
+        android:backgroundTint="@color/linh"
+        android:layout_height="wrap_content"
+
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/CircleIndicator3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/linh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/intro_button"
+        app:layout_constraintStart_toEndOf="@+id/intro_button_skip"
+        app:layout_constraintTop_toTopOf="@+id/intro_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
