@@ -6,9 +6,11 @@
     tools:context=".ativity.fragment.Home">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home" />
+        android:layout_height="60dp">
+        
+    </androidx.appcompat.widget.Toolbar>
+
 
 </FrameLayout>
