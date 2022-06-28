@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.Item.ScreenItiemIntro
 import com.tunanh.lfood.ativity.adapter.IntroViewPagerAdapter
+
 import me.relex.circleindicator.CircleIndicator3
 
 open class IntroActivity : AppCompatActivity() {
@@ -29,7 +30,8 @@ open class IntroActivity : AppCompatActivity() {
             postTolist()
             var screen_viewpager=findViewById<ViewPager2>(R.id.screen_viewpager)
 
-            screen_viewpager.adapter=IntroViewPagerAdapter(titleList,descriptionList,imgList,colorList)
+            screen_viewpager.adapter=
+                IntroViewPagerAdapter(titleList,descriptionList,imgList,colorList)
             screen_viewpager.orientation=ViewPager2.ORIENTATION_HORIZONTAL
 
             var indecator= findViewById<CircleIndicator3>(R.id.CircleIndicator3)
