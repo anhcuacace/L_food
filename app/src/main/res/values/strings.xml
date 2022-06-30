@@ -2,14 +2,20 @@
     <string name="app_name">L food</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-<!--    tên món ăn-->
+    <!--    tên món ăn-->
     <string name="Vietnamese_rice">Vietnamese rice</string>
-    <string name="other_Vietnamese_dishes">other Vietnamese dishes</string>
-    <string name="milktea">milktea</string>
+    <string name="other_Vietnamese_dishes">Vietnamese Non-Rice</string>
+    <string name="milktea">Boba</string>
     <string name="coffee_and_tea">coffee and tea</string>
     <string name="fastFood">fast Food</string>
     <string name="international_dishes">international dishes</string>
-    <string name="vegetarian_food">vegetarian food</string>
-<!--    tên các màn hình-->
+    <string name="junk_food">junk food</string>
+    <string name="vegetarian_food">vegetarian</string>
+
+    <!--    tên các màn hình-->
+    <string name="category">Category</string>
+<!--    text fragment home-->
+    <string name="shop_by_category">Shop By Category</string>
+    <string name="viewall">View All</string>
 
 </resources>

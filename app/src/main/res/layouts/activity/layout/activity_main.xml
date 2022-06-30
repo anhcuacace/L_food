@@ -48,4 +48,5 @@
             android:layout_height="wrap_content"
             android:text="More" />
     </com.google.android.material.tabs.TabLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,50 +1,43 @@
 package com.tunanh.lfood.ativity.adapter
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+
 import androidx.viewpager2.widget.ViewPager2
 import com.tunanh.lfood.R
-import com.tunanh.lfood.ativity.Item.SliderItem
 
-class SliderAdapter public constructor(
-    sliderItem: MutableList<SliderItem>,
-    viewPager: ViewPager2
-): RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+import com.tunanh.lfood.ativity.item.SliderItem
 
-    private var sliderItem: List<SliderItem>
-    private var viewPager:ViewPager2
-    init {
-        this.viewPager=viewPager
-        this.sliderItem=sliderItem
-    }
-    class SliderViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
-        private var imageView=itemView.findViewById<ImageView>(R.id.img_slide)
+class SliderAdapter (
+    val sliderItem: ArrayList<SliderItem>, val viewPager: ViewPager2
 
-        fun image(sliderItem: SliderItem){
-            imageView.setImageResource(sliderItem.img)
-        }
+    ): RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+    inner class SliderViewHolder (var v: View):RecyclerView.ViewHolder(v){
+var img= v.findViewById<ImageView>(R.id.img_slide)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
-        return SliderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.slide_item,parent,false))
+       var inflater= LayoutInflater.from(parent.context)
+        val v= inflater.inflate(R.layout.slide_item,parent,false)
+        return SliderViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
-        holder.image(sliderItem[position])
-//        holder.itemView.setOnClickListener()
-        if(position==sliderItem.size-1){
-            viewPager.post(runnale)
+        val listimg=sliderItem[position]
+        holder.img.setImageResource(listimg.img)
+        if (position==sliderItem.size-1){
+            viewPager.post(run)
         }
-    }
 
-    override fun getItemCount(): Int {
-        return sliderItem.size
     }
-    private val runnale= Runnable {
+    val run= Runnable {
         sliderItem.addAll(sliderItem)
         notifyDataSetChanged()
     }
+
+    override fun getItemCount(): Int =sliderItem.size
 }

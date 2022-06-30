@@ -6,17 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.tunanh.lfood.R
-import com.tunanh.lfood.ativity.Item.SliderItem
+import com.tunanh.lfood.ativity.adapter.CategoryAdapter
+import com.tunanh.lfood.ativity.adapter.CategoryrclvAdapter
+import com.tunanh.lfood.ativity.item.SliderItem
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
+import com.tunanh.lfood.ativity.data.CategoryData
+import com.tunanh.lfood.ativity.item.CategoryItem
 import me.relex.circleindicator.CircleIndicator3
 
 
 class Home : Fragment() {
 
-    val handler=Handler()
+    val handler = Handler()
+    private var categoryData = CategoryData()
+    private var img = categoryData.img
+    private var name = categoryData.name
 
 
     override fun onCreateView(
@@ -24,39 +32,34 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        var viewPager= view.findViewById<ViewPager2>(R.id.slide_home)
-        var sliderItem:MutableList<SliderItem> = ArrayList()
-        sliderItem.add(SliderItem(R.drawable.slider1))
-        sliderItem.add(SliderItem(R.drawable.slider2))
-        sliderItem.add(SliderItem(R.drawable.slider3))
-        sliderItem.add(SliderItem(R.drawable.slider4))
+        //set viewpager
+        val viewPager = view.findViewById<ViewPager2>(R.id.slide_home)
 
-        viewPager.adapter =SliderAdapter(sliderItem,viewPager)
-        var indecator= view.findViewById<CircleIndicator3>(R.id.CircleIndicator3_slide)
+        var indecator = view.findViewById<CircleIndicator3>(R.id.CircleIndicator3_slide)
+
+        var sliderAdapter = SliderAdapter(AddsliderItem(), viewPager)
+
+        viewPager.adapter = sliderAdapter
+
         indecator.setViewPager(viewPager)
+//        sliderAdapter.registerAdapterDataObserver(indecator.adapterDataObserver)
+        //set recyclerview
+        var recyclerView = view.findViewById<RecyclerView>(R.id.rcl_category_home)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = CategoryrclvAdapter(setDataList())
 
-//        viewPager.clipToPadding=false
-//        viewPager.clipChildren=false
-//        viewPager.offscreenPageLimit=3
-//        viewPager.getChildAt(0).overScrollMode= RecyclerView.OVER_SCROLL_NEVER
 
-//        var compositePageTransformer= CompositePageTransformer()
-//        compositePageTransformer.addTransformer(MarginPageTransformer(30))
-//        compositePageTransformer.addTransformer { page, position ->
-//            var r=1- abs(position)
-//            page.scaleY= 0.85f+r*0.25f
-//
-//        }
-//        viewPager2.setPageTransformer(compositePageTransformer)
-        var runnable= Runnable {
-            viewPager.currentItem=viewPager.currentItem+1
+        var runnable = Runnable {
+            viewPager.currentItem = viewPager.currentItem + 1
         }
-        viewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 handler.removeCallbacks(runnable)
 
-                handler.postDelayed(runnable,3000)
+                handler.postDelayed(runnable, 3000)
             }
 
         })
@@ -65,10 +68,28 @@ class Home : Fragment() {
         return view
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun AddsliderItem(): ArrayList<SliderItem> {
+        var sliderItem: ArrayList<SliderItem> = ArrayList()
+        sliderItem.add(SliderItem(R.drawable.slider1))
+        sliderItem.add(SliderItem(R.drawable.slider2))
+        sliderItem.add(SliderItem(R.drawable.slider3))
+        sliderItem.add(SliderItem(R.drawable.slider4))
+        return sliderItem
+
     }
 
+    private fun setDataList(): ArrayList<CategoryItem> {
+        var arrayList: ArrayList<CategoryItem> = ArrayList()
+
+        val imgs = categoryData.img
+        val names = categoryData.name
+        for (i in 0 until imgs.size - 1) {
+            arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
+        }
+
+
+        return arrayList
+    }
 
 
 }

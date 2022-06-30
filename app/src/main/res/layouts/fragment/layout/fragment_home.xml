@@ -51,7 +51,6 @@
 
 
     </androidx.appcompat.widget.Toolbar>
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/slide_home"
         android:layout_width="match_parent"
@@ -65,15 +64,59 @@
 
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/CircleIndicator3_slide"
-        android:outlineSpotShadowColor="@color/black"
+        app:ci_drawable="@drawable/bg_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+
         app:layout_constraintBottom_toBottomOf="@+id/slide_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.96" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/tv_shopbycategory"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shop_by_category"
+
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+            <TextView
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                android:id="@+id/tv_showcategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/viewall"
+                android:textColor="@color/c_btn"/>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcl_category_home"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_shopbycategory"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,4 @@
-package com.tunanh.lfood.ativity.Item
-
-import android.graphics.Color
+package com.tunanh.lfood.ativity.item
 
 
 public class ScreenItiemIntro(title: String, description:String,screenimg:Int, color: Int ) {

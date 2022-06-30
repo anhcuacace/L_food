@@ -7,7 +7,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.tunanh.lfood.R
-import com.tunanh.lfood.ativity.Item.CategoryItem
+import com.tunanh.lfood.ativity.item.CategoryItem
 
 class CategoryAdapter (var context: Context,var arrayList:ArrayList<CategoryItem>): BaseAdapter() {
     override fun getCount(): Int {
