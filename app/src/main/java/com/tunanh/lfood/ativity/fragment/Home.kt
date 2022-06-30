@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.Item.SliderItem
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
+import me.relex.circleindicator.CircleIndicator3
 
 
 class Home : Fragment() {
@@ -31,11 +32,13 @@ class Home : Fragment() {
         sliderItem.add(SliderItem(R.drawable.slider4))
 
         viewPager.adapter =SliderAdapter(sliderItem,viewPager)
+        var indecator= view.findViewById<CircleIndicator3>(R.id.CircleIndicator3_slide)
+        indecator.setViewPager(viewPager)
 
-        viewPager.clipToPadding=false
-        viewPager.clipChildren=false
-        viewPager.offscreenPageLimit=3
-        viewPager.getChildAt(0).overScrollMode= RecyclerView.OVER_SCROLL_NEVER
+//        viewPager.clipToPadding=false
+//        viewPager.clipChildren=false
+//        viewPager.offscreenPageLimit=3
+//        viewPager.getChildAt(0).overScrollMode= RecyclerView.OVER_SCROLL_NEVER
 
 //        var compositePageTransformer= CompositePageTransformer()
 //        compositePageTransformer.addTransformer(MarginPageTransformer(30))
@@ -62,6 +65,9 @@ class Home : Fragment() {
         return view
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
 
 
 
