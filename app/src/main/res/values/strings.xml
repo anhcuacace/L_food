@@ -14,8 +14,10 @@
 
     <!--    tên các màn hình-->
     <string name="category">Category</string>
+    <string name="count_voucher">8 promos are available</string>
 <!--    text fragment home-->
     <string name="shop_by_category">Shop By Category</string>
     <string name="viewall">View All</string>
+    <string name="hotdealforhotmenu">Hot deal for hot menu</string>
 
 </resources>

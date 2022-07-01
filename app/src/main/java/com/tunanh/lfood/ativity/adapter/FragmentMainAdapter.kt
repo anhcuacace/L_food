@@ -20,7 +20,8 @@ class FragmentMainAdapter(fragmentActivity: FragmentActivity): FragmentStateAdap
             1 -> Category()
             2 -> WishList()
             3 -> More()
-            else -> {throw Resources.NotFoundException("position not found")}
+            else -> {
+                throw Resources.NotFoundException("position not found")}
         }
     }
 }

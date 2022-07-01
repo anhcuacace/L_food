@@ -2,20 +2,19 @@ package com.tunanh.lfood.ativity.fragment
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.tunanh.lfood.R
-import com.tunanh.lfood.ativity.adapter.CategoryAdapter
 import com.tunanh.lfood.ativity.adapter.CategoryrclvAdapter
-import com.tunanh.lfood.ativity.item.SliderItem
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
 import com.tunanh.lfood.ativity.item.CategoryItem
+import com.tunanh.lfood.ativity.item.SliderItem
 import me.relex.circleindicator.CircleIndicator3
 
 
@@ -43,13 +42,14 @@ class Home : Fragment() {
 
         indecator.setViewPager(viewPager)
 //        sliderAdapter.registerAdapterDataObserver(indecator.adapterDataObserver)
-        //set recyclerview
-        var recyclerView = view.findViewById<RecyclerView>(R.id.rcl_category_home)
-        recyclerView.layoutManager =
+        //set recyclerview category
+        var recyclerViewCategory = view.findViewById<RecyclerView>(R.id.rcl_category_home)
+        recyclerViewCategory.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = CategoryrclvAdapter(setDataList())
-
+        recyclerViewCategory.setHasFixedSize(true)
+        recyclerViewCategory.adapter = CategoryrclvAdapter(setDataCategoryList())
+//set recyclerview hot deal
+        var recyclerViewHotdeal=
 
         var runnable = Runnable {
             viewPager.currentItem = viewPager.currentItem + 1
@@ -78,12 +78,12 @@ class Home : Fragment() {
 
     }
 
-    private fun setDataList(): ArrayList<CategoryItem> {
+    private fun setDataCategoryList(): ArrayList<CategoryItem> {
         var arrayList: ArrayList<CategoryItem> = ArrayList()
 
         val imgs = categoryData.img
         val names = categoryData.name
-        for (i in 0 until imgs.size - 1) {
+        for (i in 0 until imgs.size) {
             arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
         }
 

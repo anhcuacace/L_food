@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ativity.activity.IntroActivity">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -15,19 +15,19 @@
         app:layout_constraintBottom_toTopOf="@+id/CircleIndicator3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
 
     </androidx.viewpager2.widget.ViewPager2>
 
     <Button
-        android:background="@color/white"
         android:id="@+id/intro_button_skip"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="skip"
+        android:background="@color/white"
         android:backgroundTint="@color/linh"
+        android:text="skip"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,15 +35,15 @@
 
     <Button
         android:id="@+id/intro_button"
-        android:textColor="@color/black"
-        android:drawableTint="@color/black"
-        android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:backgroundTint="@color/linh"
-        android:layout_height="wrap_content"
-
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+        android:drawableTint="@color/black"
         android:text="Next"
+
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

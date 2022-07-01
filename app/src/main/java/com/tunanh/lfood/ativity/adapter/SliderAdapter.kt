@@ -12,32 +12,33 @@ import com.tunanh.lfood.R
 
 import com.tunanh.lfood.ativity.item.SliderItem
 
-class SliderAdapter (
+class SliderAdapter(
     val sliderItem: ArrayList<SliderItem>, val viewPager: ViewPager2
 
-    ): RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
-    inner class SliderViewHolder (var v: View):RecyclerView.ViewHolder(v){
-var img= v.findViewById<ImageView>(R.id.img_slide)
+) : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+    inner class SliderViewHolder(var v: View) : RecyclerView.ViewHolder(v) {
+        var img = v.findViewById<ImageView>(R.id.img_slide)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
-       var inflater= LayoutInflater.from(parent.context)
-        val v= inflater.inflate(R.layout.slide_item,parent,false)
+        var inflater = LayoutInflater.from(parent.context)
+        val v = inflater.inflate(R.layout.slide_item, parent, false)
         return SliderViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
-        val listimg=sliderItem[position]
+        val listimg = sliderItem[position]
         holder.img.setImageResource(listimg.img)
-        if (position==sliderItem.size-1){
+        if (position == sliderItem.size - 1) {
             viewPager.post(run)
         }
 
     }
-    val run= Runnable {
+
+    val run = Runnable {
         sliderItem.addAll(sliderItem)
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int =sliderItem.size
+    override fun getItemCount(): Int = sliderItem.size
 }

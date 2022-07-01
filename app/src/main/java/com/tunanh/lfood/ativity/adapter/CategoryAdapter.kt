@@ -9,7 +9,8 @@ import android.widget.TextView
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.item.CategoryItem
 
-class CategoryAdapter (var context: Context,var arrayList:ArrayList<CategoryItem>): BaseAdapter() {
+class CategoryAdapter(var context: Context, var arrayList: ArrayList<CategoryItem>) :
+    BaseAdapter() {
     override fun getCount(): Int {
         return arrayList.size
     }
@@ -23,12 +24,12 @@ class CategoryAdapter (var context: Context,var arrayList:ArrayList<CategoryItem
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var view=View.inflate(context,R.layout.item_category,null)
+        var view = View.inflate(context, R.layout.item_category, null)
         var icon = view.findViewById<ImageView>(R.id.img_category)
-        var name= view.findViewById<TextView>(R.id.text_category)
-        var categoryItem= arrayList.get(position)
+        var name = view.findViewById<TextView>(R.id.text_category)
+        var categoryItem = arrayList.get(position)
         icon.setImageResource(categoryItem.icon)
-        name.text=categoryItem.name
+        name.text = categoryItem.name
 
         return view
     }
