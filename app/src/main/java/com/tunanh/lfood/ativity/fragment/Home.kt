@@ -13,8 +13,10 @@ import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.adapter.CategoryrclvAdapter
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
+import com.tunanh.lfood.ativity.data.itemfood
 import com.tunanh.lfood.ativity.item.CategoryItem
 import com.tunanh.lfood.ativity.item.SliderItem
+import com.tunanh.lfood.ativity.item.itemFood
 import me.relex.circleindicator.CircleIndicator3
 
 
@@ -22,6 +24,7 @@ class Home : Fragment() {
 
     val handler = Handler()
     private var categoryData = CategoryData()
+    private var itemfood= com.tunanh.lfood.ativity.data.itemfood()
     private var img = categoryData.img
     private var name = categoryData.name
 
@@ -78,6 +81,23 @@ class Home : Fragment() {
 
     }
 
+    private fun setDataHotDealList(): ArrayList<itemFood> {
+        var arrayList: ArrayList<itemFood> = ArrayList()
+
+        val saleOff = itemfood.saleOff
+        val imgFood=itemfood.imgFood
+        val distance= itemfood.distance
+        val name= itemfood.name
+        val rating=itemfood.ratting
+        for (i in 0 until 10) {
+            if (4%i==0){
+                arrayList.add(saleOff[0],imgFood[0],resources.getString(distance[0])+resources.getString(distance[2]),resources.getString(name[0]),resources.getString(rating[0])+resources.getString(rating[2]))
+            }
+        }
+
+
+        return arrayList
+    }
     private fun setDataCategoryList(): ArrayList<CategoryItem> {
         var arrayList: ArrayList<CategoryItem> = ArrayList()
 
@@ -93,3 +113,5 @@ class Home : Fragment() {
 
 
 }
+
+

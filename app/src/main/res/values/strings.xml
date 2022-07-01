@@ -19,5 +19,19 @@
     <string name="shop_by_category">Shop By Category</string>
     <string name="viewall">View All</string>
     <string name="hotdealforhotmenu">Hot deal for hot menu</string>
+<!--    distance-->
+    <string name="distance1">0.58 km * </string>
+    <string name="distance2">1.26 km * </string>
+    <string name="distance3">22 min</string>
+    <string name="distance4">23 min</string>
+<!--    name food-->
+    <string name="name_food1">Stew beef, pieces of beef stewed in soy sauce with spices with pickled cucumber in asian style</string>
+    <string name="name_food2">Pieces of chicken fillet with mushrooms stewed in tomato sauce with boiled broccoli and rice</string>
+<!--    ratting-->
+<string name="ratting1">4.4 * </string>
+    <string name="ratting2">4.0 * </string>
+    <string name="ratting3">100+ ratings</string>
+    <string name="ratting4">60+ ratings</string>
+
 
 </resources>
