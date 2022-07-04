@@ -13,7 +13,7 @@ import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.item.SliderItem
 
 class SliderAdapter(
-    val sliderItem: ArrayList<SliderItem>, val viewPager: ViewPager2
+    val sliderItem: ArrayList<SliderItem>
 
 ) : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
     inner class SliderViewHolder(var v: View) : RecyclerView.ViewHolder(v) {
@@ -29,16 +29,10 @@ class SliderAdapter(
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
         val listimg = sliderItem[position]
         holder.img.setImageResource(listimg.img)
-        if (position == sliderItem.size - 1) {
-            viewPager.post(run)
-        }
 
     }
 
-    val run = Runnable {
-        sliderItem.addAll(sliderItem)
-        notifyDataSetChanged()
-    }
+
 
     override fun getItemCount(): Int = sliderItem.size
 }

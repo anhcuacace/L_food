@@ -17,6 +17,9 @@ open class IntroActivity : AppCompatActivity() {
     private var descriptionList= mutableListOf<String>()
     private var imgList= mutableListOf<Int>()
     private var colorList= mutableListOf<Int>()
+    private var intro_button: Button?=null
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor:SharedPreferences.Editor
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,27 +36,55 @@ open class IntroActivity : AppCompatActivity() {
             var indecator= findViewById<CircleIndicator3>(R.id.CircleIndicator3)
             indecator.setViewPager(screen_viewpager)
 
-            var intro_button=findViewById<Button>(R.id.intro_button)
-            intro_button.setOnClickListener{
-                screen_viewpager.apply {
-                    beginFakeDrag()
-                    fakeDragBy(-10f)
-                    endFakeDrag()
+            intro_button=findViewById(R.id.intro_button)
+//            intro_button!!.setOnClickListener{
+//                screen_viewpager.apply {
+//                    beginFakeDrag()
+//                    fakeDragBy(-10f)
+//                    endFakeDrag()
+//                }
+//            }
+        sharedPreferences=getSharedPreferences("MYPREF", Context.MODE_PRIVATE)
+        editor=sharedPreferences.edit()
+        screen_viewpager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (screen_viewpager.currentItem==2){
+                    changbutton()
                 }
-
+                else{
+                    intro_button?.setText("Next")
+                    intro_button!!.setOnClickListener{
+                        screen_viewpager.apply {
+                            beginFakeDrag()
+                            fakeDragBy(-200f)
+                            endFakeDrag()
+                        }
+                    }
+                }
             }
+        })
 
-        val sharedPreferences: SharedPreferences=getSharedPreferences("MYPREF", Context.MODE_PRIVATE)
-        var editor:SharedPreferences.Editor=sharedPreferences.edit()
+
         var intro_button_skip=findViewById<Button>(R.id.intro_button_skip)
         intro_button_skip.setOnClickListener {
-            editor.putBoolean("intro",true)
-            editor.apply()
-            editor.commit()
-            val intent:Intent=Intent(this,MainActivity::class.java)
+            editor?.putBoolean("intro",true)
+            editor?.apply()
+            editor?.commit()
+            val intent=Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
 
+    }
+    private fun changbutton(){
+        intro_button?.setText(resources.getText(R.string.Getstarted))
+        intro_button?.setOnClickListener {
+            editor?.putBoolean("intro",true)
+            editor?.apply()
+            editor?.commit()
+            val intent=Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun addToList(title:String,description:String,img:Int,color:Int){

@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         var viewPager = findViewById<ViewPager2>(R.id.viewpagermain)
 
 
+
         viewPager.adapter = FragmentMainAdapter(this)
         TabLayoutMediator(tabLayout, viewPager) { tab, index ->
             tab.text = when (index) {

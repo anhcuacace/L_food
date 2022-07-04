@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.adapter.CategoryrclvAdapter
+import com.tunanh.lfood.ativity.adapter.HotdealAdapter
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
 import com.tunanh.lfood.ativity.data.itemfood
@@ -22,12 +23,21 @@ import me.relex.circleindicator.CircleIndicator3
 
 class Home : Fragment() {
 
-    val handler = Handler()
+    var handler = Handler()
+//    var runnable: Runnable?=null
+    var viewPager:ViewPager2?=null
     private var categoryData = CategoryData()
-    private var itemfood= com.tunanh.lfood.ativity.data.itemfood()
+    private var itemfood = com.tunanh.lfood.ativity.data.itemfood()
     private var img = categoryData.img
     private var name = categoryData.name
+    val runnable = Runnable {
+        if (viewPager!!.currentItem == AddsliderItem().size - 1) {
+            viewPager!!.currentItem = 0
+        } else {
+            viewPager!!.currentItem = viewPager!!.currentItem + 1
+        }
 
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,34 +45,39 @@ class Home : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         //set viewpager
-        val viewPager = view.findViewById<ViewPager2>(R.id.slide_home)
+        viewPager = view.findViewById<ViewPager2>(R.id.slide_home)
 
         var indecator = view.findViewById<CircleIndicator3>(R.id.CircleIndicator3_slide)
 
-        var sliderAdapter = SliderAdapter(AddsliderItem(), viewPager)
+        var sliderAdapter = SliderAdapter(AddsliderItem(),)
 
-        viewPager.adapter = sliderAdapter
+        viewPager!!.adapter = sliderAdapter
 
         indecator.setViewPager(viewPager)
 //        sliderAdapter.registerAdapterDataObserver(indecator.adapterDataObserver)
         //set recyclerview category
+
         var recyclerViewCategory = view.findViewById<RecyclerView>(R.id.rcl_category_home)
+        recyclerViewCategory.isNestedScrollingEnabled=false
         recyclerViewCategory.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewCategory.setHasFixedSize(true)
         recyclerViewCategory.adapter = CategoryrclvAdapter(setDataCategoryList())
 //set recyclerview hot deal
-        var recyclerViewHotdeal=
+        var recyclerViewHotdeal = view.findViewById<RecyclerView>(R.id.rcl_hotdealfood_home)
+        recyclerViewHotdeal.isNestedScrollingEnabled=false
+        recyclerViewHotdeal.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewHotdeal.setHasFixedSize(false)
+        recyclerViewHotdeal.adapter = HotdealAdapter(setDataHotDealList())
 
-        var runnable = Runnable {
-            viewPager.currentItem = viewPager.currentItem + 1
-        }
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+        viewPager!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                handler.removeCallbacks(runnable)
+                handler.removeCallbacks(runnable!!)
 
-                handler.postDelayed(runnable, 3000)
+                handler.postDelayed(runnable!!, 3000)
             }
 
         })
@@ -85,19 +100,58 @@ class Home : Fragment() {
         var arrayList: ArrayList<itemFood> = ArrayList()
 
         val saleOff = itemfood.saleOff
-        val imgFood=itemfood.imgFood
-        val distance= itemfood.distance
-        val name= itemfood.name
-        val rating=itemfood.ratting
+        val imgFood = itemfood.imgFood
+        val distance = itemfood.distance
+        val name = itemfood.name
+        val rating = itemfood.ratting
         for (i in 0 until 10) {
-            if (4%i==0){
-                arrayList.add(saleOff[0],imgFood[0],resources.getString(distance[0])+resources.getString(distance[2]),resources.getString(name[0]),resources.getString(rating[0])+resources.getString(rating[2]))
+            if (i % 4 == 0) {
+                arrayList.add(
+                    itemFood(
+                        saleOff[0],
+                        imgFood[0],
+                        resources.getString(distance[0]) + resources.getString(distance[2]),
+                        resources.getString(name[0]),
+                        resources.getString(rating[0]) + resources.getString(rating[2])
+                    )
+                )
+            } else if ((i - 1) % 4 == 0) {
+                arrayList.add(
+                    itemFood(
+                        saleOff[1],
+                        imgFood[1],
+                        resources.getString(distance[0]) + resources.getString(distance[3]),
+                        resources.getString(name[1]),
+                        resources.getString(rating[0]) + resources.getString(rating[3])
+                    )
+                )
+            } else if ((i - 2) % 4 == 0) {
+                arrayList.add(
+                    itemFood(
+                        saleOff[0],
+                        imgFood[0],
+                        resources.getString(distance[1]) + resources.getString(distance[2]),
+                        resources.getString(name[0]),
+                        resources.getString(rating[1]) + resources.getString(rating[2])
+                    )
+                )
+            } else if ((i - 3) % 4 == 0) {
+                arrayList.add(
+                    itemFood(
+                        saleOff[1],
+                        imgFood[1],
+                        resources.getString(distance[1]) + resources.getString(distance[3]),
+                        resources.getString(name[1]),
+                        resources.getString(rating[1]) + resources.getString(rating[3])
+                    )
+                )
             }
         }
 
 
         return arrayList
     }
+
     private fun setDataCategoryList(): ArrayList<CategoryItem> {
         var arrayList: ArrayList<CategoryItem> = ArrayList()
 
@@ -111,7 +165,16 @@ class Home : Fragment() {
         return arrayList
     }
 
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        handler.postDelayed(runnable,3000)
+    }
 }
+
 
 

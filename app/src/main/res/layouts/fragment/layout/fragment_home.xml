@@ -15,7 +15,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="4dp"
@@ -30,21 +30,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:weightSum="20">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
-                android:layout_weight="9"
+                android:layout_weight="17"
                 android:background="@drawable/botron_timkiem" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:layout_weight="3"
                 android:background="@drawable/shopping_cart" />
 
         </LinearLayout>
@@ -60,18 +60,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_home">
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/slide_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="1dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+         />
 
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/CircleIndicator3_slide"
@@ -79,11 +75,7 @@
         android:layout_height="wrap_content"
         app:ci_drawable="@drawable/bg_indicator"
         android:layout_gravity="bottom|center_horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/slide_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.96" />
+        android:layout_marginBottom="8dp"/>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/card_voucher"
@@ -218,6 +210,9 @@
                 android:layout_below="@id/tv_hotdeal" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+
+
 
 
 

@@ -30,7 +30,7 @@ class CategoryData {
 
 class itemfood {
     var saleOff: List<Int> = listOf(
-        R.drawable.saleoff70,
+
         R.drawable.off50, R.drawable.off70
     )
         get() = field

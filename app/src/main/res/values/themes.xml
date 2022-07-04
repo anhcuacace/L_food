@@ -5,7 +5,7 @@
     <style name="Theme.LFood" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/linh</item>
-        <item name="colorPrimaryVariant">@color/linh</item>
+        <item name="colorPrimaryVariant">@color/c_btn</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
