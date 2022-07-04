@@ -19,6 +19,7 @@
     <string name="shop_by_category">Shop By Category</string>
     <string name="viewall">View All</string>
     <string name="hotdealforhotmenu">Hot deal for hot menu</string>
+    <string name="recommended_for_you">Recommended for you</string>
     <!--    distance-->
     <string name="distance1">0.58 km * </string>
     <string name="distance2">1.26 km * </string>
@@ -32,9 +33,20 @@
     <string name="ratting2">4.0 * </string>
     <string name="ratting3">100+ ratings</string>
     <string name="ratting4">60+ ratings</string>
+<!--    login-->
+    <string name="welcome">"Welcome to L Food"</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="signin">Sign in</string>
+    <string name="signin_with_google">Continue with google</string>
+    <string name="forgetpassword">Forget Password?</string>
+    <string name="create_new_acc">Create a new account</string>
     <!--    ko rõ-->
     <string name="Getstarted">Get Started</string>
     <string name="search">Search</string>
+
+
+
 
 
 </resources>

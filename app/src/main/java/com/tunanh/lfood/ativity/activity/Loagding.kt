@@ -8,13 +8,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.tunanh.lfood.R
-import java.util.*
 
-class Waiting : AppCompatActivity() {
+class Loagding : AppCompatActivity() {
     public val time_loading=1000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_waiting)
+        setContentView(R.layout.activity_loading)
         val sharedPreferences: SharedPreferences =getSharedPreferences("MYPREF", Context.MODE_PRIVATE)
         if(sharedPreferences.getBoolean("intro",false)){
           val handler= Handler(Looper.getMainLooper())

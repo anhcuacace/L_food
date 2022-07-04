@@ -54,24 +54,6 @@ class Home : Fragment() {
         viewPager!!.adapter = sliderAdapter
 
         indecator.setViewPager(viewPager)
-//        sliderAdapter.registerAdapterDataObserver(indecator.adapterDataObserver)
-        //set recyclerview category
-
-        var recyclerViewCategory = view.findViewById<RecyclerView>(R.id.rcl_category_home)
-        recyclerViewCategory.isNestedScrollingEnabled=false
-        recyclerViewCategory.layoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewCategory.setHasFixedSize(true)
-        recyclerViewCategory.adapter = CategoryrclvAdapter(setDataCategoryList())
-//set recyclerview hot deal
-        var recyclerViewHotdeal = view.findViewById<RecyclerView>(R.id.rcl_hotdealfood_home)
-        recyclerViewHotdeal.isNestedScrollingEnabled=false
-        recyclerViewHotdeal.layoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewHotdeal.setHasFixedSize(false)
-        recyclerViewHotdeal.adapter = HotdealAdapter(setDataHotDealList())
-
-
         viewPager!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -81,6 +63,32 @@ class Home : Fragment() {
             }
 
         })
+//        sliderAdapter.registerAdapterDataObserver(indecator.adapterDataObserver)
+        //set recyclerview category
+
+        var recyclerViewCategory = view.findViewById<RecyclerView>(R.id.rcl_category_home)
+        recyclerViewCategory.isNestedScrollingEnabled=false
+        recyclerViewCategory.setHasFixedSize(false)
+        recyclerViewCategory.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewCategory.setHasFixedSize(false)
+        recyclerViewCategory.adapter = CategoryrclvAdapter(setDataCategoryList())
+//set recyclerview hot deal
+        var recyclerViewHotdeal = view.findViewById<RecyclerView>(R.id.rcl_hotdealfood_home)
+        recyclerViewHotdeal.isNestedScrollingEnabled=false
+        recyclerViewHotdeal.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewHotdeal.setHasFixedSize(false)
+        recyclerViewHotdeal.adapter = HotdealAdapter(setDataHotDealList(),1)
+
+//      set recyclerview recommend
+        var recyclerViewRecommend = view.findViewById<RecyclerView>(R.id.rcl_recommend_home)
+        recyclerViewRecommend.isNestedScrollingEnabled=false
+        recyclerViewRecommend.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+        recyclerViewRecommend.setHasFixedSize(false)
+        recyclerViewRecommend.adapter = HotdealAdapter(setDataHotDealList(),2)
+
 
 
         return view
@@ -110,9 +118,9 @@ class Home : Fragment() {
                     itemFood(
                         saleOff[0],
                         imgFood[0],
-                        resources.getString(distance[0]) + resources.getString(distance[2]),
+                        resources.getString(distance[0]) +" "+  resources.getString(distance[2]),
                         resources.getString(name[0]),
-                        resources.getString(rating[0]) + resources.getString(rating[2])
+                        resources.getString(rating[0]) +" "+  resources.getString(rating[2])
                     )
                 )
             } else if ((i - 1) % 4 == 0) {
@@ -120,9 +128,9 @@ class Home : Fragment() {
                     itemFood(
                         saleOff[1],
                         imgFood[1],
-                        resources.getString(distance[0]) + resources.getString(distance[3]),
+                        resources.getString(distance[0]) +" "+  resources.getString(distance[3]),
                         resources.getString(name[1]),
-                        resources.getString(rating[0]) + resources.getString(rating[3])
+                        resources.getString(rating[0]) +" "+  resources.getString(rating[3])
                     )
                 )
             } else if ((i - 2) % 4 == 0) {
@@ -130,9 +138,9 @@ class Home : Fragment() {
                     itemFood(
                         saleOff[0],
                         imgFood[0],
-                        resources.getString(distance[1]) + resources.getString(distance[2]),
+                        resources.getString(distance[1]) +" "+  resources.getString(distance[2]),
                         resources.getString(name[0]),
-                        resources.getString(rating[1]) + resources.getString(rating[2])
+                        resources.getString(rating[1]) +" "+ resources.getString(rating[2])
                     )
                 )
             } else if ((i - 3) % 4 == 0) {
@@ -140,9 +148,9 @@ class Home : Fragment() {
                     itemFood(
                         saleOff[1],
                         imgFood[1],
-                        resources.getString(distance[1]) + resources.getString(distance[3]),
+                        resources.getString(distance[1]) +" "+  resources.getString(distance[3]),
                         resources.getString(name[1]),
-                        resources.getString(rating[1]) + resources.getString(rating[3])
+                        resources.getString(rating[1]) +" "+  resources.getString(rating[3])
                     )
                 )
             }

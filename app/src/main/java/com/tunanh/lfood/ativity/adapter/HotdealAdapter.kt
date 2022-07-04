@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.item.itemFood
+import java.lang.reflect.Type
 
-class HotdealAdapter(var arrayList: ArrayList<itemFood>):
+class HotdealAdapter(var arrayList: ArrayList<itemFood>,val type:Int):
     RecyclerView.Adapter<HotdealAdapter.MyViewHolder>() {
     inner class MyViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         var saleOff:ImageView
@@ -23,14 +24,18 @@ class HotdealAdapter(var arrayList: ArrayList<itemFood>):
         distance=itemView.findViewById(R.id.item_tv_distance)
         foodName=itemView.findViewById(R.id.item_food_name)
         rating=itemView.findViewById(R.id.rating)
-
-
-    }
+     }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val v= LayoutInflater.from(parent.context).inflate(R.layout.item_food,parent,false)
-        return MyViewHolder(v)
+
+        if (type==1){
+            return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_food,parent,false))
+        }else{
+            return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_food_2,parent,false))
+        }
+
+
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

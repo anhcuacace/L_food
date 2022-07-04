@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "998186714367",
+    "project_id": "project-demo-6a05e",
+    "storage_bucket": "project-demo-6a05e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998186714367:android:afd492aef64f660cc7b8ca",
+        "android_client_info": {
+          "package_name": "com.tunanh.lfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998186714367-bn9riinu7cg46qg3j274ino84gmfccm6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tunanh.lfood",
+            "certificate_hash": "b47ce3297635ac1568691753e5869c8a9ef13ccf"
+          }
+        },
+        {
+          "client_id": "998186714367-v2596mt3a1hj7ehg428hj6nkg1qd9oo5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOw-7s6dIUtRG09eC1RS1tEhp0gjyTKIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998186714367-v2596mt3a1hj7ehg428hj6nkg1qd9oo5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
