@@ -13,6 +13,7 @@ import com.tunanh.lfood.ativity.adapter.FragmentMainAdapter
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
