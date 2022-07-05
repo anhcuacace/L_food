@@ -3,8 +3,10 @@ package com.tunanh.lfood.ativity.activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.facebook.AccessToken
@@ -29,11 +31,14 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.tunanh.lfood.R
 import com.tunanh.lfood.databinding.ActivityLoginBinding
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class Login : AppCompatActivity() {
-    private lateinit var callbackManager: CallbackManager
+    private var callbackManager= CallbackManager.Factory.create()
     private lateinit var googleSignInClient:GoogleSignInClient
     private lateinit var auth:FirebaseAuth
+
     private lateinit var binding: ActivityLoginBinding
     var TAG=""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,30 +47,30 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("998186714367-v2596mt3a1hj7ehg428hj6nkg1qd9oo5.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
-
-        googleSignInClient= GoogleSignIn.getClient(this,gso)
-        binding.googleSignIn.setOnClickListener{
-            signIn()
-        }
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken("998186714367-v2596mt3a1hj7ehg428hj6nkg1qd9oo5.apps.googleusercontent.com")
+//            .requestEmail()
+//            .build()
+//
+//        googleSignInClient= GoogleSignIn.getClient(this,gso)
+//        binding.googleSignIn.setOnClickListener{
+//            signIn()
+//        }
         // Initialize Facebook Login button
 
-        var loginFBbutton= findViewById<LoginButton>(R.id.login_button)
 
-        loginFBbutton.setOnClickListener {
+
+        binding.loginButton.setOnClickListener {
+            auth=FirebaseAuth.getInstance()
             if (userLogin()){
-                auth=FirebaseAuth.getInstance()
+
                 auth.signOut()
             }else{
                 LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile","email"))
             }
         }
 
-        callbackManager= CallbackManager.Factory.create()
-        loginFBbutton.registerCallback(callbackManager, object :
+        LoginManager.getInstance().registerCallback(callbackManager, object :
             FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
                 Log.d(TAG, "facebook:onSuccess:$loginResult")
@@ -74,15 +79,12 @@ class Login : AppCompatActivity() {
 
             override fun onCancel() {
                 Log.d(TAG, "facebook:onCancel")
-                // ...
             }
 
             override fun onError(error: FacebookException) {
                 Log.d(TAG, "facebook:onError", error)
-                // ...
             }
         })
-        // ...
 
 
 
@@ -115,7 +117,7 @@ class Login : AppCompatActivity() {
                 Log.w(ContentValues.TAG,"Google sign in failed",e)
             }
         }
-
+        callbackManager.onActivityResult(requestCode,resultCode, data)
     }
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d(TAG, "handleFacebookAccessToken:$token")
