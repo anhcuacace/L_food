@@ -41,6 +41,12 @@
     <string name="signin_with_google">Continue with google</string>
     <string name="forgetpassword">Forget Password?</string>
     <string name="create_new_acc">Create a new account</string>
+
+    <string name="facebook_app_id">759165448845330</string>
+    <string name="fb_login_protocol_scheme">fb759165448845330</string>
+    <string name="facebook_client_token">b97cf45301b3f047eff4fe00f22b4ffc</string>
+
+
     <!--    ko rõ-->
     <string name="Getstarted">Get Started</string>
     <string name="search">Search</string>
