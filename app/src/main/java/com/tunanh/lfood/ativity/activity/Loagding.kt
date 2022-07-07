@@ -14,6 +14,9 @@ import com.tunanh.lfood.R
 import java.security.MessageDigest
 
 
+
+
+
 class Loagding : AppCompatActivity() {
     public val time_loading=1000
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,6 @@ class Loagding : AppCompatActivity() {
                 startActivity(intent)
             }, time_loading.toLong())
         }
-
 
     }
 

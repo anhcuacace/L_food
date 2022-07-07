@@ -33,9 +33,9 @@
     <string name="ratting2">4.0 * </string>
     <string name="ratting3">100+ ratings</string>
     <string name="ratting4">60+ ratings</string>
-<!--    login-->
+    <!--    login-->
     <string name="welcome">"Welcome to L Food"</string>
-    <string name="username">Username</string>
+    <string name="username">Email</string>
     <string name="password">Password</string>
     <string name="signin">Sign in</string>
     <string name="signin_with_google">Continue with google</string>
@@ -50,9 +50,9 @@
     <!--    ko rõ-->
     <string name="Getstarted">Get Started</string>
     <string name="search">Search</string>
-
-
-
-
-
+<!-- sign up-->
+    <string name="signup">Sign Up</string>
+    <string name="login_here">Already have an account?</string>
+    <string name="confirmpass">Confirm password</string>
+    <string name="namesignup">Name</string>
 </resources>
