@@ -17,7 +17,7 @@
         android:theme="@style/Theme.LFood"
         tools:targetApi="31">
         <activity
-            android:name=".SignUp"
+            android:name=".ativity.activity.SignUp"
             android:exported="false" />
 
         <meta-data
@@ -45,7 +45,13 @@
         </activity>
         <activity
             android:name=".ativity.activity.Loagding"
-            android:exported="true"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ativity.activity.MainActivity"
             android:exported="false" />
@@ -55,11 +61,7 @@
         <activity
             android:name=".ativity.activity.Login"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
@@ -31,7 +30,6 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.tunanh.lfood.R
-import com.tunanh.lfood.SignUp
 import com.tunanh.lfood.databinding.ActivityLoginBinding
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -39,7 +37,7 @@ import java.security.NoSuchAlgorithmException
 class Login : AppCompatActivity() {
     private var callbackManager= CallbackManager.Factory.create()
     private lateinit var googleSignInClient:GoogleSignInClient
-    private var auth:FirebaseAuth=FirebaseAuth.getInstance()
+    private lateinit var auth:FirebaseAuth
 
     private lateinit var binding: ActivityLoginBinding
     var TAG=""
@@ -48,7 +46,7 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-// login with google
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("998186714367-v2596mt3a1hj7ehg428hj6nkg1qd9oo5.apps.googleusercontent.com")
             .requestEmail()
@@ -61,11 +59,12 @@ class Login : AppCompatActivity() {
         // Initialize Facebook Login button
 
 
+
         binding.loginFbButton.setOnClickListener {
             auth=FirebaseAuth.getInstance()
             if (userLogin()){
 
-                auth!!.signOut()
+                auth.signOut()
             }else{
                 LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile","email"))
             }
@@ -86,42 +85,13 @@ class Login : AppCompatActivity() {
                 Log.d(TAG, "facebook:onError", error)
             }
         })
-//login with email password
-        binding.createAccountBtn.setOnClickListener {
-            startActivity(Intent(this,SignUp::class.java))
-        }
-
-        binding.btnSignin.setOnClickListener {
-            signInWithEmail()
-        }
 
 
-    }
 
-    private fun signInWithEmail() {
-        var email:String=binding.usernamelogin.text.toString()
-        var password=binding.usernamelogin.text.toString()
-
-        if (TextUtils.isEmpty(email)){
-            binding.usernamelogin.setError("Email can't be empty")
-            binding.usernamelogin.requestFocus()
-        }else if (TextUtils.isEmpty(password)){
-            binding.usernamelogin.setError("password can't be empty")
-            binding.usernamelogin.requestFocus()
-        }else{
-            auth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful){
-                    val user= auth!!.currentUser
-                    updateUI(user)
-                }else{
-                    Log.d(TAG, "email login fail")
-                }
-            }
-        }
     }
 
     private fun userLogin(): Boolean {
-        if (auth!!.currentUser!=null&& AccessToken.getCurrentAccessToken()!!.isExpired){
+        if (auth.currentUser!=null&& AccessToken.getCurrentAccessToken()!!.isExpired){
             return true
         }
         return false
@@ -133,12 +103,9 @@ class Login : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode,resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
 
-
         if (requestCode== RC_SING_IN){
-
             val task =GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 //google sign in was successful, authenticate with firebase
@@ -150,18 +117,18 @@ class Login : AppCompatActivity() {
                 Log.w(ContentValues.TAG,"Google sign in failed",e)
             }
         }
-
+        callbackManager.onActivityResult(requestCode,resultCode, data)
     }
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d(TAG, "handleFacebookAccessToken:$token")
 
         val credential = FacebookAuthProvider.getCredential(token.token)
-        auth!!.signInWithCredential(credential)
+        auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = auth!!.currentUser
+                    val user = auth.currentUser
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -175,12 +142,12 @@ class Login : AppCompatActivity() {
     private fun firebaseauthWithGoogle(idToken: String){
         auth = Firebase.auth
         val credential= GoogleAuthProvider.getCredential(idToken,null)
-        auth!!.signInWithCredential(credential)
+        auth.signInWithCredential(credential)
             .addOnCompleteListener(this){ task ->
                 if (task.isSuccessful){
                     // sign in success, update UI with the signed- in user's information
                     Log.d(ContentValues.TAG,"signInwithcredential:success")
-                    val user= auth!!.currentUser
+                    val user= auth.currentUser
                     updateUI(user)
                 }else{
                     //if sign in fails, display a message to the user
@@ -196,16 +163,14 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        var currentUser = auth?.getCurrentUser()
-        updateUI(currentUser);
-
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        var currentUser = auth.getCurrentUser()
+//        updateUI(currentUser);
+//
+//    }
     companion object{
-
         const val RC_SING_IN=1001
         const val EXTRA_NAME="EXTRA NAME"
     }

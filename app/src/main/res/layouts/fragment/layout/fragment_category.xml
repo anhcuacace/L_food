@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ativity.fragment.Category">
@@ -10,36 +11,50 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_category"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        >
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="right"
-            android:weightSum="10">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avt_user_s"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="8dp"
+                app:shapeAppearanceOverlay="@style/circleImageViewStyle" />
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="4dp"
-                android:background="@drawable/botron_timkiem" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_toRightOf="@id/avt_user_s"
+                android:layout_margin="8dp"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="25dp"/>
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_toLeftOf="@id/button"/>
+
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="0dp"
+                android:layout_width="48dp"
                 android:layout_height="45dp"
-                android:layout_weight="1"
-                android:background="@drawable/shopping_cart"
-                />
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                android:background="@drawable/shopping_cart" />
 
-        </LinearLayout>
-
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -40,8 +40,8 @@ class HotdealAdapter(var arrayList: ArrayList<itemFood>,val type:Int):
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currenItem=arrayList[position]
-        holder.saleOff.setImageResource(currenItem.saleOff)
-        holder.imgfood.setImageResource(currenItem.imgfood)
+        holder.saleOff.setImageBitmap(currenItem.saleOff)
+        holder.imgfood.setImageBitmap(currenItem.imgfood)
         holder.distance.text=currenItem.distance
         holder.foodName.text=currenItem.foodName
         holder.rating.text=currenItem.rating

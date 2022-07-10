@@ -1,5 +1,8 @@
 package com.tunanh.lfood.ativity.fragment
 
+import android.database.sqlite.SQLiteDatabase
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -14,7 +17,7 @@ import com.tunanh.lfood.ativity.adapter.CategoryrclvAdapter
 import com.tunanh.lfood.ativity.adapter.HotdealAdapter
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
-import com.tunanh.lfood.ativity.data.itemfood
+import com.tunanh.lfood.ativity.data.SQLiteHelper
 import com.tunanh.lfood.ativity.item.CategoryItem
 import com.tunanh.lfood.ativity.item.SliderItem
 import com.tunanh.lfood.ativity.item.itemFood
@@ -23,13 +26,13 @@ import me.relex.circleindicator.CircleIndicator3
 
 class Home : Fragment() {
 
-    var handler = Handler()
-//    var runnable: Runnable?=null
-    var viewPager:ViewPager2?=null
+    private var handler = Handler()
+    private var db: SQLiteHelper?=null
+    private var viewPager:ViewPager2?=null
     private var categoryData = CategoryData()
     private var itemfood = com.tunanh.lfood.ativity.data.itemfood()
-    private var img = categoryData.img
-    private var name = categoryData.name
+//    private var img = categoryData.img
+//    private var name = categoryData.name
     val runnable = Runnable {
         if (viewPager!!.currentItem == AddsliderItem().size - 1) {
             viewPager!!.currentItem = 0
@@ -44,6 +47,10 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+        //database
+        db= SQLiteHelper(view.context,"app.sqlite",null,1)
+
+
         //set viewpager
         viewPager = view.findViewById<ViewPager2>(R.id.slide_home)
 
@@ -103,63 +110,69 @@ class Home : Fragment() {
         return sliderItem
 
     }
-
     private fun setDataHotDealList(): ArrayList<itemFood> {
         var arrayList: ArrayList<itemFood> = ArrayList()
-
-        val saleOff = itemfood.saleOff
-        val imgFood = itemfood.imgFood
-        val distance = itemfood.distance
-        val name = itemfood.name
-        val rating = itemfood.ratting
-        for (i in 0 until 10) {
-            if (i % 4 == 0) {
-                arrayList.add(
-                    itemFood(
-                        saleOff[0],
-                        imgFood[0],
-                        resources.getString(distance[0]) +" "+  resources.getString(distance[2]),
-                        resources.getString(name[0]),
-                        resources.getString(rating[0]) +" "+  resources.getString(rating[2])
-                    )
-                )
-            } else if ((i - 1) % 4 == 0) {
-                arrayList.add(
-                    itemFood(
-                        saleOff[1],
-                        imgFood[1],
-                        resources.getString(distance[0]) +" "+  resources.getString(distance[3]),
-                        resources.getString(name[1]),
-                        resources.getString(rating[0]) +" "+  resources.getString(rating[3])
-                    )
-                )
-            } else if ((i - 2) % 4 == 0) {
-                arrayList.add(
-                    itemFood(
-                        saleOff[0],
-                        imgFood[0],
-                        resources.getString(distance[1]) +" "+  resources.getString(distance[2]),
-                        resources.getString(name[0]),
-                        resources.getString(rating[1]) +" "+ resources.getString(rating[2])
-                    )
-                )
-            } else if ((i - 3) % 4 == 0) {
-                arrayList.add(
-                    itemFood(
-                        saleOff[1],
-                        imgFood[1],
-                        resources.getString(distance[1]) +" "+  resources.getString(distance[3]),
-                        resources.getString(name[1]),
-                        resources.getString(rating[1]) +" "+  resources.getString(rating[3])
-                    )
-                )
-            }
+        var hotdeal =db!!.GetData("SELECT * FROM food1")
+        while (hotdeal.moveToNext()){
+            arrayList.add(itemFood(byteArrayToBitmap(hotdeal.getBlob(1)),byteArrayToBitmap(hotdeal.getBlob(2)),hotdeal.getString(3),hotdeal.getString(4),hotdeal.getString(5)))
         }
+
+
+//        val saleOff = itemfood.saleOff
+//        val imgFood = itemfood.imgFood
+//        val distance = itemfood.distance
+//        val name = itemfood.name
+//        val rating = itemfood.ratting
+//        for (i in 0 until 10) {
+//            if (i % 4 == 0) {
+//                arrayList.add(
+//                    itemFood(
+//                        saleOff[0],
+//                        imgFood[0],
+//                        resources.getString(distance[0]) +" "+  resources.getString(distance[2]),
+//                        resources.getString(name[0]),
+//                        resources.getString(rating[0]) +" "+  resources.getString(rating[2])
+//                    )
+//                )
+//            } else if ((i - 1) % 4 == 0) {
+//                arrayList.add(
+//                    itemFood(
+//                        saleOff[1],
+//                        imgFood[1],
+//                        resources.getString(distance[0]) +" "+  resources.getString(distance[3]),
+//                        resources.getString(name[1]),
+//                        resources.getString(rating[0]) +" "+  resources.getString(rating[3])
+//                    )
+//                )
+//            } else if ((i - 2) % 4 == 0) {
+//                arrayList.add(
+//                    itemFood(
+//                        saleOff[0],
+//                        imgFood[0],
+//                        resources.getString(distance[1]) +" "+  resources.getString(distance[2]),
+//                        resources.getString(name[0]),
+//                        resources.getString(rating[1]) +" "+ resources.getString(rating[2])
+//                    )
+//                )
+//            } else if ((i - 3) % 4 == 0) {
+//                arrayList.add(
+//                    itemFood(
+//                        saleOff[1],
+//                        imgFood[1],
+//                        resources.getString(distance[1]) +" "+  resources.getString(distance[3]),
+//                        resources.getString(name[1]),
+//                        resources.getString(rating[1]) +" "+  resources.getString(rating[3])
+//                    )
+//                )
+//            }
+//        }
 
 
         return arrayList
     }
-
+    private fun byteArrayToBitmap(data: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(data, 0, data.size)
+    }
     private fun setDataCategoryList(): ArrayList<CategoryItem> {
         var arrayList: ArrayList<CategoryItem> = ArrayList()
 
@@ -183,6 +196,8 @@ class Home : Fragment() {
         handler.postDelayed(runnable,3000)
     }
 }
+
+
 
 
 
