@@ -26,16 +26,14 @@ class SQLiteHelper(context: Context, name:String, factory: SQLiteDatabase.Cursor
     public fun INSERT_food(sale:ByteArray,imgfood:ByteArray,distance:String,name: String,rating: String){
         var db =writableDatabase
 
-        val sql="INSERT INTO food1(null,?,?,?,?,?)"
+        val sql="INSERT INTO food1(,?,?,?,?,?)"
         val statement= db.compileStatement(sql)
         statement.clearBindings()
-
         statement.bindBlob(1,sale)
         statement.bindBlob(2,imgfood)
         statement.bindString(3,distance)
         statement.bindString(4,name)
         statement.bindString(5,rating)
-
         statement.executeInsert()
     }
     public fun GetData(sql: String):Cursor{

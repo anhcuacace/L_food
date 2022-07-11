@@ -50,9 +50,12 @@
     <!--    ko rõ-->
     <string name="Getstarted">Get Started</string>
     <string name="search">Search</string>
-<!-- sign up-->
+    <!-- sign up-->
     <string name="signup">Sign Up</string>
     <string name="login_here">Already have an account?</string>
     <string name="confirmpass">Confirm password</string>
     <string name="namesignup">Name</string>
+    <!--    more-->
+    <string name="edit_profile">Edit profile     ></string>
+    <string name="account">Account</string>
 </resources>
