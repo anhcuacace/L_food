@@ -89,12 +89,12 @@ class Home : Fragment() {
         recyclerViewHotdeal.adapter = HotdealAdapter(setDataHotDealList(),1)
 
 //      set recyclerview recommend
-        var recyclerViewRecommend = view.findViewById<RecyclerView>(R.id.rcl_recommend_home)
-        recyclerViewRecommend.isNestedScrollingEnabled=false
-        recyclerViewRecommend.layoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-        recyclerViewRecommend.setHasFixedSize(false)
-        recyclerViewRecommend.adapter = HotdealAdapter(setDataHotDealList(),2)
+//        var recyclerViewRecommend = view.findViewById<RecyclerView>(R.id.rcl_recommend_home)
+//        recyclerViewRecommend.isNestedScrollingEnabled=false
+//        recyclerViewRecommend.layoutManager =
+//            LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+//        recyclerViewRecommend.setHasFixedSize(false)
+//        recyclerViewRecommend.adapter = HotdealAdapter(setDataHotDealList(),2)
 
 
 
@@ -111,11 +111,11 @@ class Home : Fragment() {
 
     }
     private fun setDataHotDealList(): ArrayList<itemFood> {
-        var arrayList: ArrayList<itemFood> = ArrayList()
-        var hotdeal =db!!.GetData("SELECT * FROM food1")
-        while (hotdeal.moveToNext()){
-            arrayList.add(itemFood(byteArrayToBitmap(hotdeal.getBlob(1)),byteArrayToBitmap(hotdeal.getBlob(2)),hotdeal.getString(3),hotdeal.getString(4),hotdeal.getString(5)))
-        }
+//        var arrayList: ArrayList<itemFood> = ArrayList()
+//        var hotdeal =db!!.GetData("SELECT * FROM food1")
+//        while (hotdeal.moveToNext()){
+//            arrayList.add(itemFood(byteArrayToBitmap(hotdeal.getBlob(1)),byteArrayToBitmap(hotdeal.getBlob(2)),hotdeal.getString(3),hotdeal.getString(4),hotdeal.getString(5)))
+//        }
 
 
 //        val saleOff = itemfood.saleOff
@@ -168,7 +168,7 @@ class Home : Fragment() {
 //        }
 
 
-        return arrayList
+//        return arrayList
     }
     private fun byteArrayToBitmap(data: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(data, 0, data.size)
@@ -176,8 +176,8 @@ class Home : Fragment() {
     private fun setDataCategoryList(): ArrayList<CategoryItem> {
         var arrayList: ArrayList<CategoryItem> = ArrayList()
 
-        val imgs = categoryData.img
-        val names = categoryData.name
+        var imgs = categoryData.img
+        var names = categoryData.name
         for (i in 0 until imgs.size) {
             arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
         }

@@ -1,14 +1,18 @@
 package com.tunanh.lfood.ativity.activity
 
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.storage.FirebaseStorage
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.adapter.FragmentMainAdapter
 import com.tunanh.lfood.ativity.data.SQLiteHelper
@@ -120,5 +124,15 @@ class MainActivity : AppCompatActivity() {
         val stream = ByteArrayOutputStream()
         bitmap.compress(CompressFormat.JPEG, 100, stream)
         return stream.toByteArray()
+    }
+    fun getimgcategory( name:String) : Bitmap {
+        var bitmap:Bitmap
+        var storage= FirebaseStorage.getInstance()
+        var imageRef=storage.getReference().child("category").child(name+".png")
+        imageRef.getBytes(Long.MAX_VALUE)
+            .addOnSuccessListener { byteArray ->
+                bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            }
+return bitmap
     }
 }
