@@ -58,15 +58,11 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <GridView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@id/toolbar_category"
         android:id="@+id/grid_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="150dp"
-        android:gravity="center"
-        android:horizontalSpacing="15sp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="15dp" />
+        />
 
 </RelativeLayout>

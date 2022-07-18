@@ -29,16 +29,7 @@ class CategoryData {
         R.string.vegetarian_food
     )
         get() = field
-    fun getimgcategory( name:String) : Bitmap {
-        var bitmap:Bitmap
-        var storage= FirebaseStorage.getInstance()
-        var imageRef=storage.getReference().child("category").child(name+".png")
-        imageRef.getBytes(Long.MAX_VALUE)
-            .addOnSuccessListener { byteArray ->
-                bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            }
-        return bitmap
-    }
+
 }
 
 class itemfood {

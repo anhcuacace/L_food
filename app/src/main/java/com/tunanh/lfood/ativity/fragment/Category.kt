@@ -1,40 +1,62 @@
 package com.tunanh.lfood.ativity.fragment
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.GridView
+import android.widget.GridLayout
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
-import com.google.firebase.ktx.Firebase
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.adapter.CategoryAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
 import com.tunanh.lfood.ativity.item.CategoryItem
 
 class Category : Fragment(), AdapterView.OnItemClickListener {
-    private var gridView: GridView? = null
-    private var array: ArrayList<CategoryItem>? = null
+    private var recyclerView: RecyclerView? = null
+
     private var categoryAdapter: CategoryAdapter? = null
     private var categoryData = CategoryData()
-//    lateinit var storage: FirebaseStorage
+    private var option: FirebaseRecyclerOptions<CategoryItem>? = null
 
+    //    private lateinit var bitmap: Bitmap
+//    lateinit var storage: FirebaseStorage
+    private lateinit var dbRef: DatabaseReference
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_category, container, false)
 
-        gridView = view.findViewById(R.id.grid_category)
-        array = ArrayList()
-        array = setDataList()
-        categoryAdapter = CategoryAdapter(view.context, array!!,1)
-        gridView?.adapter = categoryAdapter
-        gridView?.onItemClickListener = this
+        recyclerView = view.findViewById(R.id.grid_category)
+//        array = arrayListOf<CategoryItem>()
+//        array = ArrayList()
+//        array = setDataList()
+
+
+        recyclerView?.layoutManager = GridLayoutManager(context, 2)
+//        getCategoryData()
+
+        option = FirebaseRecyclerOptions.Builder<CategoryItem>()
+            .setQuery(
+                FirebaseDatabase.getInstance().getReference().child("Category"),
+                CategoryItem::class.java
+            ).build()
+
+        categoryAdapter = CategoryAdapter(view.context, option!!, 1)
+        recyclerView?.adapter = categoryAdapter
+
+//        recyclerView?.onItemClickListener = this
 //        storage = Firebase.storage
 //        val storageRef = storage.reference
 //        val pathReference = storageRef.child("images/stars.jpg")
@@ -42,29 +64,87 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
         return view
     }
 
-    private fun setDataList(): ArrayList<CategoryItem> {
-        var arrayList: ArrayList<CategoryItem> = ArrayList()
-//        val imgs = categoryData.img
-        val names = categoryData.name
-//        for (i in 0 until imgs.size) {
-//            arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
+
+    class CategoryViewholder(v: View) : RecyclerView.ViewHolder(v) {
+
+    }
+
+
+//    private fun getCategoryData() {
+//
+//        dbRef = FirebaseDatabase.getInstance().getReference("Category")
+//
+//        dbRef.addValueEventListener(object : ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                array!!.clear()
+//                if (snapshot.exists()){
+//                    for (i in snapshot.children){
+//                        val empData= i.getValue(CategoryItem::class.java)
+//                        array!!.add(empData!!)
+//                    }
+//                    recyclerView!!.adapter=CategoryAdapter(array!!,1)
+//
+//                }
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
+//    }
+//    public fun getimgcategory( name:String) : Bitmap {
+
+//        var storage= FirebaseStorage.getInstance()
+//        var imageRef=storage.getReference().child("category").child(name+".png")
+//        imageRef.getBytes(Long.MAX_VALUE)
+//            .addOnSuccessListener { byteArray ->
+//                bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+//
+//            }
+//
+//        if (bitmap==null){
+//            bitmap=resources.getDrawable(R.drawable.ic_launcher_foreground,resources.newTheme()).toBitmap()
+//            return bitmap
+//        }else{
+//            return bitmap
 //        }
-arrayList.add(CategoryItem(categoryData.getimgcategory("rice"),resources.getString(names[0])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("rice"),resources.getString(names[0])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("banh_mi"),resources.getString(names[1])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("bubble_tea"),resources.getString(names[3])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("fast_food"),resources.getString(names[4])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("tea"),resources.getString(names[5])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("international"),resources.getString(names[6])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("junk_food"),resources.getString(names[7])))
-        arrayList.add(CategoryItem(categoryData.getimgcategory("vegetable"),resources.getString(names[8])))
-        return arrayList
+
+    //    }
+//    private fun setDataList(): ArrayList<CategoryItem> {
+//
+//        var arrayList: ArrayList<CategoryItem> = ArrayList()
+////        val imgs = categoryData.img
+//        val names = categoryData.name
+////        for (i in 0 until imgs.size) {
+////            arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
+////        }
+//        arrayList.add(CategoryItem(getimgcategory("rice"), resources.getString(names[0])))
+//        arrayList.add(CategoryItem(getimgcategory("rice"), resources.getString(names[0])))
+//        arrayList.add(CategoryItem(getimgcategory("banh_mi"), resources.getString(names[1])))
+//        arrayList.add(CategoryItem(getimgcategory("bubble_tea"), resources.getString(names[3])))
+//        arrayList.add(CategoryItem(getimgcategory("fast_food"), resources.getString(names[4])))
+//        arrayList.add(CategoryItem(getimgcategory("tea"), resources.getString(names[5])))
+//        arrayList.add(CategoryItem(getimgcategory("international"), resources.getString(names[6])))
+//        arrayList.add(CategoryItem(getimgcategory("junk_food"), resources.getString(names[7])))
+//        arrayList.add(CategoryItem(getimgcategory("vegetable"), resources.getString(names[8])))
+//        return arrayList
+//    }
+    override fun onStart() {
+        super.onStart()
+        categoryAdapter?.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        categoryAdapter?.stopListening()
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-        var categoryItem: CategoryItem = array!!.get(position)
-        Toast.makeText(context, categoryItem.name, Toast.LENGTH_SHORT).show()
+//        var categoryItem: CategoryItem = option!!.get(position)
+//        Toast.makeText(context, categoryItem.name, Toast.LENGTH_SHORT).show()
     }
 }
 

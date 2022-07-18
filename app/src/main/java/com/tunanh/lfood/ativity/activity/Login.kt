@@ -70,21 +70,21 @@ class Login : AppCompatActivity() {
             }
         }
 
-        LoginManager.getInstance().registerCallback(callbackManager, object :
-            FacebookCallback<LoginResult> {
-            override fun onSuccess(loginResult: LoginResult) {
-                Log.d(TAG, "facebook:onSuccess:$loginResult")
-                handleFacebookAccessToken(loginResult.accessToken)
-            }
-
-            override fun onCancel() {
-                Log.d(TAG, "facebook:onCancel")
-            }
-
-            override fun onError(error: FacebookException) {
-                Log.d(TAG, "facebook:onError", error)
-            }
-        })
+//        LoginManager.getInstance().registerCallback(callbackManager, object :
+//            FacebookCallback<LoginResult> {
+//            override fun onSuccess(loginResult: LoginResult) {
+//                Log.d(TAG, "facebook:onSuccess:$loginResult")
+//                handleFacebookAccessToken(loginResult.accessToken)
+//            }
+//
+//            override fun onCancel() {
+//                Log.d(TAG, "facebook:onCancel")
+//            }
+//
+//            override fun onError(error: FacebookException) {
+//                Log.d(TAG, "facebook:onError", error)
+//            }
+//        })
 
 
 
