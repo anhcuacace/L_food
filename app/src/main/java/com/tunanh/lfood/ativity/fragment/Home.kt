@@ -3,21 +3,27 @@ package com.tunanh.lfood.ativity.fragment
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.storage.FirebaseStorage
 import com.tunanh.lfood.R
-import com.tunanh.lfood.ativity.adapter.CategoryrclvAdapter
+
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.FirebaseDatabase
+import com.tunanh.lfood.ativity.adapter.CategoryAdapter
 import com.tunanh.lfood.ativity.adapter.HotdealAdapter
 import com.tunanh.lfood.ativity.adapter.SliderAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
-import com.tunanh.lfood.ativity.data.SQLiteHelper
+//import com.tunanh.lfood.ativity.data.SQLiteHelper
 import com.tunanh.lfood.ativity.item.CategoryItem
 import com.tunanh.lfood.ativity.item.SliderItem
 import com.tunanh.lfood.ativity.item.itemFood
@@ -27,10 +33,13 @@ import me.relex.circleindicator.CircleIndicator3
 class Home : Fragment() {
 
     private var handler = Handler()
-    private var db: SQLiteHelper?=null
+//    private var db: SQLiteHelper?=null
     private var viewPager:ViewPager2?=null
     private var categoryData = CategoryData()
     private var itemfood = com.tunanh.lfood.ativity.data.itemfood()
+    private lateinit var bitmap: Bitmap
+    private var categoryAdapter: CategoryAdapter? = null
+    private var option: FirebaseRecyclerOptions<CategoryItem>? = null
 //    private var img = categoryData.img
 //    private var name = categoryData.name
     val runnable = Runnable {
@@ -48,7 +57,7 @@ class Home : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         //database
-        db= SQLiteHelper(view.context,"app.sqlite",null,1)
+//        db= SQLiteHelper(view.context,"app.sqlite",null,1)
 
 
         //set viewpager
@@ -78,15 +87,23 @@ class Home : Fragment() {
         recyclerViewCategory.setHasFixedSize(false)
         recyclerViewCategory.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewCategory.setHasFixedSize(false)
-        recyclerViewCategory.adapter = CategoryrclvAdapter(setDataCategoryList())
+        option = FirebaseRecyclerOptions.Builder<CategoryItem>()
+            .setQuery(
+                FirebaseDatabase.getInstance().getReference().child("Category"),
+                CategoryItem::class.java
+            ).build()
+
+        categoryAdapter = CategoryAdapter(view.context, option!!, 2)
+        recyclerViewCategory?.adapter = categoryAdapter
+//        recyclerViewCategory.setHasFixedSize(false)
+//        recyclerViewCategory.adapter = CategoryrclvAdapter(setDataCategoryList())
 //set recyclerview hot deal
-        var recyclerViewHotdeal = view.findViewById<RecyclerView>(R.id.rcl_hotdealfood_home)
-        recyclerViewHotdeal.isNestedScrollingEnabled=false
-        recyclerViewHotdeal.layoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewHotdeal.setHasFixedSize(false)
-        recyclerViewHotdeal.adapter = HotdealAdapter(setDataHotDealList(),1)
+//        var recyclerViewHotdeal = view.findViewById<RecyclerView>(R.id.rcl_hotdealfood_home)
+//        recyclerViewHotdeal.isNestedScrollingEnabled=false
+//        recyclerViewHotdeal.layoutManager =
+//            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+//        recyclerViewHotdeal.setHasFixedSize(false)
+//        recyclerViewHotdeal.adapter = HotdealAdapter(setDataHotDealList(),1)
 
 //      set recyclerview recommend
 //        var recyclerViewRecommend = view.findViewById<RecyclerView>(R.id.rcl_recommend_home)
@@ -110,7 +127,7 @@ class Home : Fragment() {
         return sliderItem
 
     }
-    private fun setDataHotDealList(): ArrayList<itemFood> {
+//    private fun setDataHotDealList(): ArrayList<itemFood> {
 //        var arrayList: ArrayList<itemFood> = ArrayList()
 //        var hotdeal =db!!.GetData("SELECT * FROM food1")
 //        while (hotdeal.moveToNext()){
@@ -169,22 +186,46 @@ class Home : Fragment() {
 
 
 //        return arrayList
-    }
+//    }
     private fun byteArrayToBitmap(data: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(data, 0, data.size)
     }
-    private fun setDataCategoryList(): ArrayList<CategoryItem> {
-        var arrayList: ArrayList<CategoryItem> = ArrayList()
+    public fun getimgcategory( name:String) : Bitmap {
 
-        var imgs = categoryData.img
-        var names = categoryData.name
-        for (i in 0 until imgs.size) {
-            arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
+        var storage= FirebaseStorage.getInstance()
+        var imageRef=storage.getReference().child("category").child(name+".png")
+        imageRef.getBytes(Long.MAX_VALUE)
+            .addOnSuccessListener { byteArray ->
+                bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+
+            }
+
+        if (bitmap==null){
+            bitmap=resources.getDrawable(R.drawable.ic_launcher_foreground,resources.newTheme()).toBitmap()
+            return bitmap
+        }else{
+            return bitmap
         }
 
-
-        return arrayList
     }
+//    private fun setDataCategoryList(): ArrayList<CategoryItem> {
+//        var arrayList: ArrayList<CategoryItem> = ArrayList()
+////        val imgs = categoryData.img
+//        val names = categoryData.name
+////        for (i in 0 until imgs.size) {
+////            arrayList.add(CategoryItem(imgs[i], resources.getString(names[i])))
+////        }
+//        arrayList.add(CategoryItem(getimgcategory("rice"),resources.getString(names[0])))
+//        arrayList.add(CategoryItem(getimgcategory("rice"),resources.getString(names[0])))
+//        arrayList.add(CategoryItem(getimgcategory("banh_mi"),resources.getString(names[1])))
+//        arrayList.add(CategoryItem(getimgcategory("bubble_tea"),resources.getString(names[3])))
+//        arrayList.add(CategoryItem(getimgcategory("fast_food"),resources.getString(names[4])))
+//        arrayList.add(CategoryItem(getimgcategory("tea"),resources.getString(names[5])))
+//        arrayList.add(CategoryItem(getimgcategory("international"),resources.getString(names[6])))
+//        arrayList.add(CategoryItem(getimgcategory("junk_food"),resources.getString(names[7])))
+//        arrayList.add(CategoryItem(getimgcategory("vegetable"),resources.getString(names[8])))
+//        return arrayList
+//    }
 
     override fun onPause() {
         super.onPause()

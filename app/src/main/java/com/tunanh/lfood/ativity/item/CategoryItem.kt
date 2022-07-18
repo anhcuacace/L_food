@@ -3,11 +3,11 @@ package com.tunanh.lfood.ativity.item
 import android.graphics.Bitmap
 
 class CategoryItem {
-    var icon: Bitmap
+    var img: String
     var name: String
 
-    public constructor(icon: Bitmap, name: String) {
-        this.icon = icon
+    public constructor(img: String, name: String) {
+        this.img = img
         this.name = name
     }
 }
