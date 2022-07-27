@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/linh"
         tools:context=".ativity.activity.Login">
 
@@ -104,27 +104,52 @@
             android:id="@+id/tv_login_here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
             android:text="@string/login_here"
-            app:layout_constraintBottom_toTopOf="@+id/btn_signup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/confirmpasswordsignup" />
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/terms"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_login_here">-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkbox_terms"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/terms"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="@color/black"/>-->
+<!--        </LinearLayout>-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
             android:layout_marginRight="25dp"
-            android:layout_marginBottom="15dp"
             android:background="@drawable/login_btn"
-
             android:text="@string/signup"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_login_here" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

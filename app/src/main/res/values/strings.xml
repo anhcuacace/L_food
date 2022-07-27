@@ -55,6 +55,7 @@
     <string name="login_here">Already have an account?</string>
     <string name="confirmpass">Confirm password</string>
     <string name="namesignup">Name</string>
+    <string name="terms">I Agree To The Terms and condition</string>
     <!--    more-->
     <string name="edit_profile">Edit profile     ></string>
     <string name="account">Account</string>

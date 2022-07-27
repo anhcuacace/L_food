@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-import androidx.viewpager2.widget.ViewPager2
+
 import com.tunanh.lfood.R
 
 import com.tunanh.lfood.ativity.item.SliderItem
@@ -21,7 +21,7 @@ class SliderAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
-        var inflater = LayoutInflater.from(parent.context)
+        val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.slide_item, parent, false)
         return SliderViewHolder(v)
     }
