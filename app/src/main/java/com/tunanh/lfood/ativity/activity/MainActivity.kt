@@ -1,33 +1,36 @@
 package com.tunanh.lfood.ativity.activity
 
-import android.content.res.Resources
-import android.graphics.Bitmap
+
+import android.content.Intent
 import android.graphics.Bitmap.CompressFormat
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.storage.FirebaseStorage
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tunanh.lfood.R
-import com.tunanh.lfood.ativity.adapter.FragmentMainAdapter
-
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
-    private var itemfood = com.tunanh.lfood.ativity.data.itemfood()
+//    private var itemfood = com.tunanh.lfood.ativity.data.itemfood()
 //    private val db:SQLiteHelper?=null
+    private lateinit var navController:NavController
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val navHostFragment=supportFragmentManager.findFragmentById(R.id.maincontainer) as NavHostFragment
+        navController=navHostFragment.navController
 
+        val bottomNavigationView=findViewById<BottomNavigationView>(R.id.buttonNavigation)
+        setupWithNavController(bottomNavigationView,navController)
         //database
 //        val db= SQLiteHelper(this.applicationContext,"app.sqlite",null,1)
 //setDataHotDealList()
@@ -85,35 +88,58 @@ class MainActivity : AppCompatActivity() {
 //
 //            }
 //        }
-        var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
-        var viewPager = findViewById<ViewPager2>(R.id.viewpagermain)
-        viewPager.isUserInputEnabled=false
-        viewPager.adapter = FragmentMainAdapter(this)
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, index ->
-            tab.text = when (index) {
-                0 -> {
-                    "home"
-                }
-                1 -> {
-                    "category"
-                }
-                2 -> {
-                    "wish list"
-                }
-                3 -> {
-                    "more"
-                }
-                else -> {
-                    throw Resources.NotFoundException("position not found")
-                }
-            }
-        }.attach()
+//        var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+//        var viewPager = findViewById<ViewPager2>(R.id.viewpagermain)
+//        viewPager.isUserInputEnabled=false
+//        viewPager.adapter = FragmentMainAdapter(this)
+//
+//        TabLayoutMediator(tabLayout, viewPager) { tab, index ->
+//            tab.text = when (index) {
+//                0 -> {
+//                    "home"
+//                }
+//                1 -> {
+//                    "category"
+//                }
+//                2 -> {
+//                    "wish list"
+//                }
+//                3 -> {
+//                    "more"
+//                }
+//                else -> {
+//                    throw Resources.NotFoundException("position not found")
+//                }
+//            }
+//        }.attach()
 
 
     }
-    private fun setDataHotDealList() {
 
+    private var count = 0
+    override fun onBackPressed() {
+        count++
+        if (count > 1) {
+            /* If count is greater than 1 ,you can either move to the next
+//        activity or just quit. */
+//            val intent = Intent(this, Login::class.java)
+//            intent.putExtra("")
+//            startActivity(intent)
+//            finish()
+
+            /* Quitting */finishAffinity()
+        } else {
+            Toast.makeText(this, "Press back again to Leave!", Toast.LENGTH_SHORT).show()
+
+            // resetting the counter in 2s
+            val handler = Handler(Looper.getMainLooper())
+
+            handler.postDelayed( { count = 0 }, 2000)
+        }
+        super.onBackPressed()
+    }
+
+    private fun setDataHotDealList() {
 
 
 

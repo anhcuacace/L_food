@@ -13,6 +13,9 @@
     <string name="vegetarian_food">vegetarian</string>
 
     <!--    tên các màn hình-->
+    <string name="more">More</string>
+    <string name="wishlist">Wish list</string>
+    <string name="home">Home</string>
     <string name="category">Category</string>
     <string name="count_voucher">8 promos are available</string>
     <!--    text fragment home-->

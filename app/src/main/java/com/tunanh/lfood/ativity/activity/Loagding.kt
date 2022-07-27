@@ -1,5 +1,6 @@
 package com.tunanh.lfood.ativity.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,6 +10,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Base64
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.tunanh.lfood.R
 import java.security.MessageDigest
@@ -27,6 +31,7 @@ class Loagding : AppCompatActivity() {
             val handler= Handler(Looper.getMainLooper())
             handler.postDelayed({
                 val intent= Intent(this,Login::class.java)
+
                 startActivity(intent)
 
             }, time_loading.toLong())
