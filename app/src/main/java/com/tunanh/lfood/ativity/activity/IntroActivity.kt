@@ -27,13 +27,13 @@ open class IntroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
 
             postTolist()
-            var screen_viewpager=findViewById<ViewPager2>(R.id.screen_viewpager)
+            val screen_viewpager=findViewById<ViewPager2>(R.id.screen_viewpager)
 
             screen_viewpager.adapter=
                 IntroViewPagerAdapter(titleList,descriptionList,imgList,colorList)
             screen_viewpager.orientation=ViewPager2.ORIENTATION_HORIZONTAL
 
-            var indecator= findViewById<CircleIndicator3>(R.id.CircleIndicator3)
+            val indecator= findViewById<CircleIndicator3>(R.id.CircleIndicator3)
             indecator.setViewPager(screen_viewpager)
 
             intro_button=findViewById(R.id.intro_button)
@@ -66,12 +66,12 @@ open class IntroActivity : AppCompatActivity() {
         })
 
 
-        var intro_button_skip=findViewById<Button>(R.id.intro_button_skip)
+        val intro_button_skip=findViewById<Button>(R.id.intro_button_skip)
         intro_button_skip.setOnClickListener {
-            editor?.putBoolean("intro",true)
-            editor?.apply()
-            editor?.commit()
-            val intent=Intent(this,MainActivity::class.java)
+            editor.putBoolean("intro",true)
+            editor.apply()
+            editor.commit()
+            val intent=Intent(this,Login::class.java)
             startActivity(intent)
         }
 
@@ -79,10 +79,10 @@ open class IntroActivity : AppCompatActivity() {
     private fun changbutton(){
         intro_button?.setText(resources.getText(R.string.Getstarted))
         intro_button?.setOnClickListener {
-            editor?.putBoolean("intro",true)
-            editor?.apply()
-            editor?.commit()
-            val intent=Intent(this,MainActivity::class.java)
+            editor.putBoolean("intro",true)
+            editor.apply()
+            editor.commit()
+            val intent=Intent(this,Login::class.java)
             startActivity(intent)
         }
     }

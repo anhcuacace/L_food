@@ -85,30 +85,30 @@ class MainActivity : AppCompatActivity() {
 //
 //            }
 //        }
-        var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
-        var viewPager = findViewById<ViewPager2>(R.id.viewpagermain)
-        viewPager.isUserInputEnabled=false
-        viewPager.adapter = FragmentMainAdapter(this)
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, index ->
-            tab.text = when (index) {
-                0 -> {
-                    "home"
-                }
-                1 -> {
-                    "category"
-                }
-                2 -> {
-                    "wish list"
-                }
-                3 -> {
-                    "more"
-                }
-                else -> {
-                    throw Resources.NotFoundException("position not found")
-                }
-            }
-        }.attach()
+//        var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+//        var viewPager = findViewById<ViewPager2>(R.id.viewpagermain)
+//        viewPager.isUserInputEnabled=false
+//        viewPager.adapter = FragmentMainAdapter(this)
+//
+//        TabLayoutMediator(tabLayout, viewPager) { tab, index ->
+//            tab.text = when (index) {
+//                0 -> {
+//                    "home"
+//                }
+//                1 -> {
+//                    "category"
+//                }
+//                2 -> {
+//                    "wish list"
+//                }
+//                3 -> {
+//                    "more"
+//                }
+//                else -> {
+//                    throw Resources.NotFoundException("position not found")
+//                }
+//            }
+//        }.attach()
 
 
     }
@@ -118,12 +118,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    fun getBytesFromBitmap(drawable: Int): ByteArray {
-        var d=resources.getDrawable(drawable)
-        val bitmap = (d as BitmapDrawable).bitmap
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(CompressFormat.JPEG, 100, stream)
-        return stream.toByteArray()
-    }
+//    fun getBytesFromBitmap(drawable: Int): ByteArray {
+//        var d=resources.getDrawable(drawable)
+//        val bitmap = (d as BitmapDrawable).bitmap
+//        val stream = ByteArrayOutputStream()
+//        bitmap.compress(CompressFormat.JPEG, 100, stream)
+//        return stream.toByteArray()
+//    }
 
 }

@@ -32,12 +32,8 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
     //    private lateinit var bitmap: Bitmap
 //    lateinit var storage: FirebaseStorage
     private lateinit var dbRef: DatabaseReference
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_category, container, false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.grid_category)
 //        array = arrayListOf<CategoryItem>()
 //        array = ArrayList()
@@ -55,6 +51,30 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 
         categoryAdapter = CategoryAdapter(view.context, option!!, 1)
         recyclerView?.adapter = categoryAdapter
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_category, container, false)
+
+//        recyclerView = view.findViewById(R.id.grid_category)
+////        array = arrayListOf<CategoryItem>()
+////        array = ArrayList()
+////        array = setDataList()
+//
+//
+//        recyclerView?.layoutManager = GridLayoutManager(context, 2)
+////        getCategoryData()
+//
+//        option = FirebaseRecyclerOptions.Builder<CategoryItem>()
+//            .setQuery(
+//                FirebaseDatabase.getInstance().getReference().child("Category"),
+//                CategoryItem::class.java
+//            ).build()
+//
+//        categoryAdapter = CategoryAdapter(view.context, option!!, 1)
+//        recyclerView?.adapter = categoryAdapter
 
 //        recyclerView?.onItemClickListener = this
 //        storage = Firebase.storage
@@ -65,9 +85,9 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
     }
 
 
-    class CategoryViewholder(v: View) : RecyclerView.ViewHolder(v) {
-
-    }
+//    class CategoryViewholder(v: View) : RecyclerView.ViewHolder(v) {
+//
+//    }
 
 
 //    private fun getCategoryData() {
