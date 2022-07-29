@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.GridLayout
 import android.widget.Toast
+import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,24 +22,25 @@ import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.adapter.CategoryAdapter
 import com.tunanh.lfood.ativity.data.CategoryData
 import com.tunanh.lfood.ativity.item.CategoryItem
+import java.text.ParsePosition
 
 class Category : Fragment(), AdapterView.OnItemClickListener {
     private var recyclerView: RecyclerView? = null
 
     private var categoryAdapter: CategoryAdapter? = null
-//    private var categoryData = CategoryData()
+    private var categoryData = CategoryData()
     private var option: FirebaseRecyclerOptions<CategoryItem>? = null
 
     //    private lateinit var bitmap: Bitmap
 //    lateinit var storage: FirebaseStorage
-//    private lateinit var dbRef: DatabaseReference
+    private lateinit var dbRef: DatabaseReference
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_category, container, false)
 
-
+//dbRef= FirebaseDatabase.getInstance().getReference("Category")
 
 //        recyclerView?.onItemClickListener = this
 //        storage = Firebase.storage
@@ -76,27 +78,19 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 
 //    private fun getCategoryData() {
 //
-//        dbRef = FirebaseDatabase.getInstance().getReference("Category")
-//
-//        dbRef.addValueEventListener(object : ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                array!!.clear()
-//                if (snapshot.exists()){
-//                    for (i in snapshot.children){
-//                        val empData= i.getValue(CategoryItem::class.java)
-//                        array!!.add(empData!!)
-//                    }
-//                    recyclerView!!.adapter=CategoryAdapter(array!!,1)
+//        var firebaseRecyclerAdapter= object :
+//            FirebaseRecyclerAdapter<CategoryItem, CategoryViewholder>(
+//                CategoryItem::class.java,
+//                R.layout.item_category,
+//                CategoryViewholder::class.java,
+//                dbRef
+//            )
+//        {
+//                override fun populateViewHolder(viewholder: CategoryViewholder,model:CategoryItem,position: Int){
 //
 //                }
-//
 //            }
 //
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
 //    }
 //    public fun getimgcategory( name:String) : Bitmap {
 
@@ -135,6 +129,8 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 //        arrayList.add(CategoryItem(getimgcategory("vegetable"), resources.getString(names[8])))
 //        return arrayList
 //    }
+
+
     override fun onStart() {
         super.onStart()
         categoryAdapter?.startListening()
@@ -142,8 +138,12 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 
     override fun onStop() {
         super.onStop()
-        categoryAdapter?.stopListening()
+//        categoryAdapter?.stopListening()
     }
+
+//    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//        TODO("Not yet implemented")
+//    }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -151,5 +151,9 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 //        Toast.makeText(context, categoryItem.name, Toast.LENGTH_SHORT).show()
     }
 }
+
+//    class CategoryViewholder (itemView: View?):RecyclerView.ViewHolder(itemView!!){
+//
+//    }
 
 
