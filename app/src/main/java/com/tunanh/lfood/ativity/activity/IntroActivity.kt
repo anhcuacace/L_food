@@ -5,7 +5,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.tunanh.lfood.R
 import com.tunanh.lfood.ativity.adapter.IntroViewPagerAdapter
@@ -97,5 +100,20 @@ open class IntroActivity : AppCompatActivity() {
         addToList("ORDER ONLINE","you can eat anything\nas long as L Food",R.drawable.asset1_4x,R.color.linh)
         addToList("SELECT FOOD","Just sit at home and L food take care",R.drawable.asset2_4x,R.color.linh)
         addToList("DELIVERY","Just sit at home and L food take care",R.drawable.asset3_4x,R.color.linh)
+    }
+    private var count = 0
+    override fun onBackPressed() {
+        count++
+        if (count > 1) {
+            finishAffinity()
+        } else {
+            Toast.makeText(this, "Press back again to Leave!", Toast.LENGTH_SHORT).show()
+
+            // resetting the counter in 2s
+            val handler = Handler(Looper.getMainLooper())
+
+            handler.postDelayed({ count = 0 }, 2000)
+        }
+        super.onBackPressed()
     }
 }

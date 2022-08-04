@@ -7,6 +7,8 @@ import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tunanh.lfood.databinding.ActivitySignUpBinding
 
 class SignUp : AppCompatActivity() {
@@ -61,7 +63,24 @@ class SignUp : AppCompatActivity() {
 
 
     private fun updateUI() {
-        startActivity(Intent(this,MainActivity::class.java))
+        val intent=Intent(this,MainActivity::class.java)
+        val user = Firebase.auth.currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+
+            // Check if user's email is verified
+            val emailVerified = user.isEmailVerified
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            val uid = user.uid
+        }
+        intent.putExtra("user",user)
+        startActivity(intent)
     }
 
 

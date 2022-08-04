@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "998186714367-sip6rlsduc3qfkqfp30pi0cto3jeptq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tunanh.lfood",
+            "certificate_hash": "cfc5fe6fb1a9a49c819dd48cf20bb8e71e6cb164"
+          }
+        },
+        {
           "client_id": "998186714367-vj6ciohvb74oti0ivtan22ftsg9bs4k8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

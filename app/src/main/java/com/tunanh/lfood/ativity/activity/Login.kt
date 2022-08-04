@@ -1,9 +1,10 @@
 package com.tunanh.lfood.ativity.activity
 
-import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 
 import android.content.Intent
+import android.content.SharedPreferences
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,11 +14,7 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-
 import com.facebook.CallbackManager
-import com.google.android.gms.actions.NoteIntents.EXTRA_NAME
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -35,10 +32,11 @@ import com.tunanh.lfood.databinding.ActivityLoginBinding
 
 
 class Login : AppCompatActivity() {
-    private var callbackManager= CallbackManager.Factory.create()
-    private lateinit var googleSignInClient:GoogleSignInClient
-    private lateinit var auth:FirebaseAuth
-//    private val startForResult =
+    private var callbackManager = CallbackManager.Factory.create()
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
+
+    //    private val startForResult =
 //        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
 //
 //            if (Activity.RESULT_OK == RC_SING_IN) {
@@ -46,7 +44,7 @@ class Login : AppCompatActivity() {
 //                try {
 //                    //google sign in was successful, authenticate with firebase
 //                    val account=task.getResult(ApiException::class.java)!!
-//                    Log.d(ContentValues.TAG,"FirebaseAuthWithGoogle:"+ account.id)
+//                     Log.d(ContentValues.TAG,"FirebaseAuthWithGoogle:"+ account.id)
 //                    firebaseauthWithGoogle(account.idToken!!)
 //                }catch (e:ApiException){
 //                    // google sign in failed, update iu
@@ -56,7 +54,7 @@ class Login : AppCompatActivity() {
 //            callbackManager.onActivityResult(Activity.RESULT_OK,result.resultCode, result.data)
 //        }
     private lateinit var binding: ActivityLoginBinding
-    var TAG="Login"
+    var TAG = "Login"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -67,13 +65,14 @@ class Login : AppCompatActivity() {
             .requestIdToken("998186714367-v2596mt3a1hj7ehg428hj6nkg1qd9oo5.apps.googleusercontent.com")
             .requestEmail()
             .build()
-
-        googleSignInClient= GoogleSignIn.getClient(this,gso)
-
-        binding.googleSignIn.setOnClickListener{
-            signIn()
-
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        binding.googleSignIn.setOnClickListener {
+            signInGoogle()
         }
+        binding.btnSignin.setOnClickListener {
+            signIn()
+        }
+        auth = Firebase.auth
         // Initialize Facebook Login button
 
 
@@ -92,7 +91,6 @@ class Login : AppCompatActivity() {
 //                Log.d(TAG, "facebook:onError", error)
 //            }
 //        })
-
 
 
 //        binding.loginFbButton.setOnClickListener {
@@ -123,8 +121,32 @@ class Login : AppCompatActivity() {
 
 // login with email password
 //        binding.btnSignin
-        auth = Firebase.auth
+
     }
+
+    private fun signIn() {
+        val username = binding.usernamelogin.text.toString()
+        val password = binding.passwordlogin.text.toString()
+        auth.signInWithEmailAndPassword(username, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success")
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext, "email or password fail",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    updateUI(null)
+                }
+            }
+        // [END sign_in_with_email]
+    }
+
 
 //    private fun userLogin(): Boolean {
 //        if (auth.currentUser!=null&& AccessToken.getCurrentAccessToken()!!.isExpired){
@@ -133,8 +155,8 @@ class Login : AppCompatActivity() {
 //        return false
 //    }
 
-    private fun signIn() {
-        val signIntent= googleSignInClient.signInIntent
+    private fun signInGoogle() {
+        val signIntent = googleSignInClient.signInIntent
         startActivityForResult(signIntent, RC_SING_IN)
 //startForResult.launch(signIntent)
     }
@@ -142,21 +164,22 @@ class Login : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode== RC_SING_IN){
-            val task =GoogleSignIn.getSignedInAccountFromIntent(data)
+        if (requestCode == RC_SING_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 //google sign in was successful, authenticate with firebase
-                val account=task.getResult(ApiException::class.java)!!
-                Log.d(ContentValues.TAG,"FirebaseAuthWithGoogle:"+ account.id)
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d(ContentValues.TAG, "FirebaseAuthWithGoogle:" + account.id)
                 firebaseauthWithGoogle(account.idToken!!)
-            }catch (e:ApiException){
+            } catch (e: ApiException) {
                 // google sign in failed, update iu
-                Log.w(ContentValues.TAG,"Google sign in failed",e)
+                Log.w(ContentValues.TAG, "Google sign in failed", e)
             }
         }
-        callbackManager.onActivityResult(requestCode,resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
-//    private fun handleFacebookAccessToken(token: AccessToken) {
+
+    //    private fun handleFacebookAccessToken(token: AccessToken) {
 //        Log.d(TAG, "handleFacebookAccessToken:$token")
 //
 //        val credential = FacebookAuthProvider.getCredential(token.token)
@@ -176,39 +199,46 @@ class Login : AppCompatActivity() {
 //                }
 //            }
 //    }
-    private fun firebaseauthWithGoogle(idToken: String){
+    private fun firebaseauthWithGoogle(idToken: String) {
 
-        val credential= GoogleAuthProvider.getCredential(idToken,null)
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener(this){ task ->
-                if (task.isSuccessful){
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
                     // sign in success, update UI with the signed- in user's information
-                    Log.d(ContentValues.TAG,"signInwithcredential:success")
-                    val user= auth.currentUser
+                    Log.d(ContentValues.TAG, "signInwithcredential:success")
+                    val user = auth.currentUser
+
                     updateUI(user)
-                }else{
+                } else {
                     //if sign in fails, display a message to the user
-                    Log.w(ContentValues.TAG,"signinWithCredential:failure",task.exception)
+                    Log.w(ContentValues.TAG, "signinWithCredential:failure", task.exception)
                     updateUI(null)
                 }
             }
     }
 
 
-    private fun updateUI(user:FirebaseUser?){
-        if (user!=null){
-            val intent= Intent(applicationContext,MainActivity::class.java)
-            intent.putExtra(EXTRA_NAME,user.displayName)
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra(EXTRA_NAME, user.displayName)
+            val sharedPreferences: SharedPreferences =
+                getSharedPreferences("MYPREF", Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor
+            editor = sharedPreferences.edit()
+            editor.putBoolean("user", true)
             startActivity(intent)
             finish()
         }
     }
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser= auth.currentUser
-        updateUI(currentUser)
-    }
+
+    //    override fun onStart() {
+//        super.onStart()
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        val currentUser= auth.currentUser
+//        updateUI(currentUser)
+//    }
     private var count = 0
     override fun onBackPressed() {
         count++
@@ -227,12 +257,16 @@ class Login : AppCompatActivity() {
             // resetting the counter in 2s
             val handler = Handler(Looper.getMainLooper())
 
-            handler.postDelayed( { count = 0 }, 2000)
+            handler.postDelayed({ count = 0 }, 2000)
         }
         super.onBackPressed()
     }
-    companion object{
-        const val RC_SING_IN=1001
-        const val EXTRA_NAME="EXTRA NAME"
+
+    companion object {
+        const val RC_SING_IN = 1001
+        const val EXTRA_NAME = "EXTRA NAME"
     }
+
 }
+
+

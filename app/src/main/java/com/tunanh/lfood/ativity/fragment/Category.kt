@@ -63,7 +63,7 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 
         option = FirebaseRecyclerOptions.Builder<CategoryItem>()
             .setQuery(
-                FirebaseDatabase.getInstance().getReference().child("Category"),
+                FirebaseDatabase.getInstance().getReference().child("category"),
                 CategoryItem::class.java
             ).build()
 
@@ -138,7 +138,7 @@ class Category : Fragment(), AdapterView.OnItemClickListener {
 
     override fun onStop() {
         super.onStop()
-//        categoryAdapter?.stopListening()
+        categoryAdapter?.stopListening()
     }
 
 //    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

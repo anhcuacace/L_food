@@ -17,7 +17,7 @@
 
         <ImageView
 
-            android:id="@+id/img_category_rcl"
+            android:id="@+id/img_category"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_centerInParent="true"
@@ -28,7 +28,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/text_category_rclv"
+        android:id="@+id/text_category"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/card_rcl"
