@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/drawable/botton_nav_color.xml" value="0.1" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/drawable/switch_trcks.xml" value="0.299" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/drawable/switch_tumbs.xml" value="0.299" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/layout/activity_intro.xml" value="0.3625" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/layout/activity_loading.xml" value="0.2109375" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/layout/activity_search.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/layout/activity_sign_up.xml" value="0.1625" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/activity/menu/botton_nav_menu.xml" value="0.18" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/bg_indicator.xml" value="0.14" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/botron.xml" value="0.1715" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/botron_timkiem.xml" value="0.299" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/ic_google_2015_favicon_01.xml" value="0.1715" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/ic_heart.xml" value="0.218" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/drawable/ic_home.xml" value="0.14" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/layout/fragment_category.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/layout/fragment_home.xml" value="0.15729166666666666" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/layout/fragment_more.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/fragment/layout/fragment_wish_list.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/item/layout/item_category.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/item/layout/item_food.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/item/layout/item_food_2.xml" value="0.25" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/item/layout/item_rclv_category.xml" value="0.2796875" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/item/layout/layout_screen.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Nguyen Tuan Anh/StudioProjects/L_food/app/src/main/res/layouts/item/layout/slide_item.xml" value="0.1625" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

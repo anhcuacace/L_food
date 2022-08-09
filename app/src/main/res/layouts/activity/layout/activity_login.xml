@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/login_layout">
 
 
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:src="@drawable/loading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/loading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-
         android:layout_gravity="center"
         android:elevation="10dp"
         app:cardCornerRadius="28dp"
@@ -60,7 +61,7 @@
                     android:paddingTop="6dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="6dp"
-                    android:text="@string/log_in"
+                    android:text="@string/com_facebook_loginview_log_in_button"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="16sp"
@@ -77,7 +78,7 @@
                     android:paddingTop="6dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="6dp"
-                    android:text="@string/sign_up"
+                    android:text="@string/signup"
                     android:textAlignment="center"
                     android:textColor="#F51D1E22"
                     android:textSize="16sp"
@@ -102,7 +103,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="4dp"
-                    android:hint="@string/email_or_username"
+                    android:hint="@string/fui_email_hint"
                     app:boxStrokeColor="#4E4A4A"
                     app:boxStrokeWidth="1dp"
                     app:shapeAppearanceOverlay="@style/Button4">
@@ -146,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@string/forget_password"
+                    android:text="@string/forgetpassword"
                     android:textAlignment="textEnd"
                     android:textColor="#616161"
                     android:textSize="11sp" />
@@ -170,7 +171,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="4dp"
-                    android:hint="@string/email_or_username"
+                    android:hint="@string/fui_email_hint"
                     app:boxStrokeColor="#4E4A4A"
                     app:boxStrokeWidth="1dp"
                     app:shapeAppearanceOverlay="@style/Button4">
@@ -216,7 +217,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="4dp"
-                    android:hint="@string/confirm_password"
+                    android:hint="@string/comfirmpass"
 
                     app:boxStrokeColor="#4E4A4A"
                     app:boxStrokeWidth="1dp"
@@ -244,10 +245,10 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/btn_log_in"
+                android:background="@drawable/switch_trcks"
                 android:elevation="16dp"
                 android:gravity="center"
-                android:text="@string/log_in"
+                android:text="@string/com_facebook_loginview_log_in_button"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
@@ -259,10 +260,10 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/btn_log_in"
+                android:background="@drawable/login_btn"
                 android:elevation="16dp"
                 android:gravity="center"
-                android:text="@string/sign_up"
+                android:text="@string/signup"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -297,12 +298,13 @@
                     android:src="@drawable/facebook" />
 
                 <ImageButton
+                    android:id="@+id/googleSignIn"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_margin="10dp"
                     android:background="@color/transparentColor"
                     android:scaleType="fitXY"
-                    android:src="@drawable/google" />
+                    android:src="@drawable/ic_google_2015_favicon_01" />
             </LinearLayout>
 
         </LinearLayout>
@@ -311,5 +313,4 @@
     </androidx.cardview.widget.CardView>
 
 
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

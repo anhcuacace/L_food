@@ -2,9 +2,9 @@ package com.tunanh.lfood.ativity.item
 
 
 public class ScreenItiemIntro(title: String, description:String,screenimg:Int, color: Int ) {
-var title:String
+var title:String = ""
     get() {
-        return title
+        return field
     }
     set(value) {}
     var description: String

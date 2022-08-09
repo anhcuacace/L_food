@@ -33,7 +33,7 @@ open class IntroActivity : AppCompatActivity() {
             val screen_viewpager=findViewById<ViewPager2>(R.id.screen_viewpager)
 
             screen_viewpager.adapter=
-                IntroViewPagerAdapter(titleList,descriptionList,imgList,colorList)
+                IntroViewPagerAdapter(titleList,descriptionList,imgList)
             screen_viewpager.orientation=ViewPager2.ORIENTATION_HORIZONTAL
 
             val indecator= findViewById<CircleIndicator3>(R.id.CircleIndicator3)

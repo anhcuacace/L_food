@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.maincontainer) as NavHostFragment
         navController=navHostFragment.navController
+        getputInfo()
 
         val bottomNavigationView=findViewById<BottomNavigationView>(R.id.buttonNavigation)
         setupWithNavController(bottomNavigationView,navController)
@@ -114,6 +116,10 @@ class MainActivity : AppCompatActivity() {
 //        }.attach()
 
 
+    }
+
+    private fun getputInfo() {
+        val name= intent.getStringExtra("EXTRA NAME")
     }
 
     private var count = 0

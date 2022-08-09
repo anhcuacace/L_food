@@ -12,7 +12,7 @@ class IntroViewPagerAdapter(
     private var title: List<String>,
     private var description: List<String>,
     private var img: List<Int>,
-    private var color: List<Int>
+
 ) : RecyclerView.Adapter<IntroViewPagerAdapter.Pager2ViewHolder>() {
 
     inner class Pager2ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,7 +22,7 @@ class IntroViewPagerAdapter(
 
         init {
             itemIntroimg.setOnClickListener { v: View ->
-                val position = adapterPosition
+
 
             }
         }
@@ -39,7 +39,7 @@ class IntroViewPagerAdapter(
         holder.itemIntroTitle.text = title[position]
         holder.itemIntrodescription.text = description[position]
         holder.itemIntroimg.setImageResource(img[position])
-        holder.itemView.setBackgroundColor(color[position])
+
 
     }
 
